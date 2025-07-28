@@ -28,7 +28,7 @@ class ValidationV4 {
 
     public function __construct(
             private readonly string $url = "https://api.egon.com/v4/validation/address",
-            private readonly string $token = "b4fe924796db0794d0adf552b0986ab55b246364baa7d8187fe2ccbd700cd17a"
+            private readonly string $token = ""
     ) {
         
     }
