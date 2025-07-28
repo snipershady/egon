@@ -1,1 +1,1 @@
-{"version":1,"defects":{"Egon\\Tests\\BasicTest::testOne":8},"times":{"Egon\\Tests\\BasicTest::testOne":0.002}}
+{"version":1,"defects":{"Egon\\Tests\\BasicTest::testOne":8,"Egon\\Tests\\BasicTest::testRemoteSampleResponse":7},"times":{"Egon\\Tests\\BasicTest::testOne":0.002,"Egon\\Tests\\BasicTest::testPersistedSampleResponse":0.002,"Egon\\Tests\\BasicTest::testRemoteSampleResponse":0.601}}

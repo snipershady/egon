@@ -46,7 +46,7 @@ class BasicTest extends AbstractTestCase {
         return json_decode($content, true, 512, JSON_THROW_ON_ERROR);
     }
 
-    public function testOne(): void {
+    public function testPersistedSampleResponse(): void {
         try {
             $arrayContent = $this->loadJsonFromFile(__DIR__ . '/sample_response.json');
         } catch (RuntimeException $e) {
@@ -165,6 +165,90 @@ class BasicTest extends AbstractTestCase {
         // System
         $this->assertEquals(0, $system->getRetCode());
         $this->assertEquals('Ok', $system->getDesRetCode());
+
+        $this->assertTrue(true);
+    }
+
+    public function testRemoteSampleResponse(): void {
+        try {
+            $v = new \Egon\Service\ValidationV4();
+            $arrayContent = $v->validate();
+        } catch (RuntimeException $e) {
+            echo "Errore: " . $e->getMessage();
+        }
+
+        try {
+            $response = ValidationV4Mapper::fromArray($arrayContent);
+            // Puoi fare asserzioni qui, ad esempio:
+            $this->assertNotNull($response);
+            $this->assertInstanceOf(ValidationV4Response::class, $response);
+        } catch (Throwable $e) {
+            fwrite(STDERR, "Exception caught: " . $e::class . "\n");
+            fwrite(STDERR, $e->getMessage() . "\n");
+            fwrite(STDERR, $e->getTraceAsString() . "\n");
+
+            $this->fail("Exception thrown during fromArray(): " . $e->getMessage());
+        }
+
+        $data = $response->getData();
+        $standard = $data->getAddress()->getStandard();
+        $smart = $data->getAddress()->getSmart();
+        $geo = $data->getGeo();
+        $postal = $data->getPostal();
+        $quality = $response->getQuality()->getAddress();
+        $system = $response->getSystem();
+
+        // Standard address assertions
+        $this->assertEquals('ITA', $standard->getIso3());
+        $this->assertEquals('Italia', $standard->getCountry());
+        $this->assertEquals('Veneto', $standard->getRegion());
+        $this->assertEquals('Verona', $standard->getProvince());
+        $this->assertEquals('VR', $standard->getProvinceCode());
+        $this->assertEquals('Verona', $standard->getCity());
+        $this->assertEquals('37135', $standard->getZipcode());
+        $this->assertEquals('Via', $standard->getStreetType());
+        $this->assertEquals('Antonio Pacinotti', $standard->getStreetName());
+        $this->assertEquals('Via Antonio Pacinotti', $standard->getStreet());
+        $this->assertEquals('Via Antonio Pacinotti,4/B', $standard->getAddress());
+        $this->assertEquals('Via Antonio Pacinotti,4/B, Verona, VR, Veneto, 37135, Italia', $standard->getFullAddress());
+        $this->assertEquals('4/B', $standard->getHn());
+        $this->assertEquals('VERONA', $standard->getPostalTown1());
+
+        $admCodes = $standard->getAdmCode();
+        $this->assertCount(12, $admCodes);
+
+        $egonCode = $standard->getEgonCode();
+        $this->assertEquals(38000004730, $egonCode->getCity());
+        $this->assertEquals(38000073526, $egonCode->getStreet());
+        $this->assertEquals(380100008326045, $egonCode->getHn());
+
+        // Smart address assertions
+        $this->assertEquals('Italia', $smart->getCountry());
+        $this->assertEquals('Verona', $smart->getAdministrativeLevel());
+        $this->assertEquals('Verona', $smart->getCity());
+        $this->assertEquals('Via Antonio Pacinotti,4/B', $smart->getAddress());
+        $this->assertEquals('37135', $smart->getZipcode());
+
+        // Geo
+        $this->assertEquals('45.40616800, 10.97379600', $geo->getLatLong());
+        $this->assertEquals('A41-111', $geo->getGeoLevel());
+        //$this->assertEquals('0230910000922', $geo->getCensusCode());
+        // Postal
+        $this->assertEquals('VIA ANTONIO PACINOTTI 4/B', $postal->getRow4());
+        $this->assertEquals('37135 VERONA VR', $postal->getRow5());
+
+        // Quality
+        $this->assertEquals('0', $quality->getLocality()->getFlag());
+        $this->assertEquals(0, $quality->getLocality()->getCode());
+        $this->assertEquals(strtolower('Ok'), strtolower($quality->getLocality()->getDescription()));
+
+        $this->assertEquals('0', $quality->getHn()->getFlag());
+        $this->assertEquals(0, $quality->getHn()->getCode());
+        $this->assertEquals(strtolower('Ok'), strtolower($quality->getHn()->getDescription()));
+
+        // System
+        $this->assertEquals(0, $system->getRetCode());
+        $this->assertEquals(strtolower('Ok'), strtolower((string) $system->getDesRetCode()));
 
         $this->assertTrue(true);
     }
