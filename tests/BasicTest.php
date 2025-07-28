@@ -2,8 +2,10 @@
 
 namespace Egon\Tests;
 
-use ErrorException;
-use Exception;
+use Egon\Dto\ResponseValidationV4\ValidationV4Mapper;
+use Egon\Dto\ResponseValidationV4\ValidationV4Response;
+use RuntimeException;
+use Throwable;
 
 /*
  * Copyright (C) 2022 Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
@@ -27,11 +29,45 @@ use Exception;
  *
  * @author Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
  * 
- * @example ./vendor/bin/phpunit tests/BasicTest.php 
+ * @example ./vendor/bin/phpunit --display-output tests/BasicTest.php 
  */
 class BasicTest extends AbstractTestCase {
 
+    private function loadJsonFromFile(string $filePath): ?array {
+        if (!file_exists($filePath)) {
+            throw new RuntimeException("File not found: $filePath");
+        }
+
+        $content = file_get_contents($filePath);
+
+        if ($content === false) {
+            throw new RuntimeException("Unable to read file: $filePath");
+        }
+        return json_decode($content, true, 512, JSON_THROW_ON_ERROR);
+    }
+
     public function testOne(): void {
-        
+        try {
+            $arrayContent = $this->loadJsonFromFile(__DIR__ . '/sample_response.json');
+        } catch (RuntimeException $e) {
+            echo "Errore: " . $e->getMessage();
+        }
+
+        try {
+            $map = ValidationV4Mapper::fromArray($arrayContent);
+            // Puoi fare asserzioni qui, ad esempio:
+            $this->assertNotNull($map);
+            $this->assertInstanceOf(ValidationV4Response::class, $map);
+        } catch (Throwable $e) {
+            fwrite(STDERR, "Exception caught: " . $e::class . "\n");
+            fwrite(STDERR, $e->getMessage() . "\n");
+            fwrite(STDERR, $e->getTraceAsString() . "\n");
+
+            $this->fail("Exception thrown during fromArray(): " . $e->getMessage());
+        }
+
+        var_dump($map);
+
+        $this->assertTrue(true);
     }
 }

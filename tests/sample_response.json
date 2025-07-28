@@ -1,0 +1,130 @@
+{
+    "data": {
+        "address": {
+            "standard": {
+                "iso3": "ITA",
+                "country": "Italia",
+                "region": "Veneto",
+                "province": "Verona",
+                "province_code": "VR",
+                "city": "Verona",
+                "zipcode": "37135",
+                "street_type": "Via",
+                "street_name": "Antonio Pacinotti",
+                "street": "Via Antonio Pacinotti",
+                "address": "Via Antonio Pacinotti,4/B",
+                "full_address": "Via Antonio Pacinotti,4/B, Verona, VR, Veneto, 37135, Italia",
+                "hn": "4/B",
+                "postal_town1": "VERONA",
+                "adm_code": [
+                    {
+                        "iso3": "ITA",
+                        "type": "50137",
+                        "value": "VR"
+                    },
+                    {
+                        "iso3": "ITA",
+                        "type": "30030",
+                        "value": "11700"
+                    },
+                    {
+                        "iso3": "ITA",
+                        "type": "30000",
+                        "value": "L781"
+                    },
+                    {
+                        "iso3": "ITA",
+                        "type": "30021",
+                        "value": "023091"
+                    },
+                    {
+                        "iso3": "ITA",
+                        "type": "30060",
+                        "value": "086"
+                    },
+                    {
+                        "iso3": "ITA",
+                        "type": "30061",
+                        "value": "660999"
+                    },
+                    {
+                        "iso3": "ITA",
+                        "type": "30050",
+                        "value": "0777000"
+                    },
+                    {
+                        "iso3": "ITA",
+                        "type": "30071",
+                        "value": "IT"
+                    },
+                    {
+                        "iso3": "ITA",
+                        "type": "30070",
+                        "value": "ITA"
+                    },
+                    {
+                        "iso3": "ITA",
+                        "type": "30072",
+                        "value": "380"
+                    },
+                    {
+                        "iso3": "ITA",
+                        "type": "30114",
+                        "value": "ITALIA"
+                    },
+                    {
+                        "iso3": "ITA",
+                        "type": "30022",
+                        "value": "005"
+                    }
+                ],
+                "egon_code": {
+                    "city": 38000004730,
+                    "street": 38000073526,
+                    "hn": 380100008326045
+                }
+            },
+            "smart": {
+                "country": "Italia",
+                "administrative_level": "Verona",
+                "city": "Verona",
+                "address": "Via Antonio Pacinotti,4/B",
+                "zipcode": "37135"
+            }
+        },
+        "geo": {
+            "lat_long": "45.40616800, 10.97379600",
+            "geo_level": "A41-111",
+            "census_code": "0230910000922"
+        },
+        "postal": {
+            "row4": "VIA ANTONIO PACINOTTI 4/B",
+            "row5": "37135 VERONA VR"
+        }
+    },
+    "quality": {
+        "address": {
+            "locality": {
+                "flag": "0",
+                "code": 0,
+                "description": "Ok"
+            },
+            "street": {
+                "flag": "1",
+                "code": 801,
+                "description": "Candidato strada con parole in meno"
+            },
+            "hn": {
+                "flag": "0",
+                "code": 0,
+                "description": "Ok"
+            }
+        }
+    },
+    "system": {
+        "ret_code": 0,
+        "des_ret_code": "Ok"
+    }
+}
+
+ 
