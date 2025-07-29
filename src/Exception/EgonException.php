@@ -9,7 +9,7 @@ use Throwable;
  * 
  * @author Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
  */
-class CurlException extends Exception {
+class EgonException extends Exception {
 
     /**
      * 
@@ -17,7 +17,7 @@ class CurlException extends Exception {
      * @param int $code
      * @param Throwable|null $previous
      */
-    public function __construct(string $message = "CurlException", int $code = 0, ?Throwable $previous = null) {
-        parent::__construct("CurlException: " . $message, $code, $previous);
+    public function __construct(string $message = "EgonException", int $code = 0, ?Throwable $previous = null) {
+        parent::__construct("EgonException " . $message, $code, $previous);
     }
 }

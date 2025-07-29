@@ -8,7 +8,7 @@ use Egon\Dto\ResponseValidationV4\ValidationV4Response;
 use Egon\Enum\CountryCodeAlpha3Enum;
 use Egon\Enum\OutputGeoCodingEnum;
 use Egon\Service\ValidationV4;
-use RuntimeException;
+use Exception;
 use Throwable;
 
 /*
@@ -44,14 +44,15 @@ class BasicRemoteTest extends AbstractTestCase {
         try {
             $token = "";
             $v = new ValidationV4($token);
-            $arrayContent = $v->validate($address, CountryCodeAlpha3Enum::ITALY, OutputGeoCodingEnum::GEOCODING_ON);
-        } catch (RuntimeException $e) {
-            echo "Errore: " . $e->getMessage();
+            $arrayContent = $v->getValidAddress($address, CountryCodeAlpha3Enum::ITALY, OutputGeoCodingEnum::GEOCODING_ON);
+        } catch (Exception $e) {
+            $msg = "Exception: " . $e->getMessage() . PHP_EOL;
+            fwrite(STDERR, $msg);
+            $this->fail("Exception thrown during validate call: " . $msg);
         }
 
         try {
             $response = ValidationV4Mapper::fromArray($arrayContent);
-            // Puoi fare asserzioni qui, ad esempio:
             $this->assertNotNull($response);
             $this->assertInstanceOf(ValidationV4Response::class, $response);
         } catch (Throwable $e) {

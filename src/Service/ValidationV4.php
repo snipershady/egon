@@ -6,6 +6,7 @@ use Egon\Dto\RequestValidationV4\Address;
 use Egon\Enum\CountryCodeAlpha3Enum;
 use Egon\Enum\OutputGeoCodingEnum;
 use Egon\Exception\CurlException;
+use Egon\Exception\EgonException;
 
 /*
  * Copyright (C) 2022 Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
@@ -38,7 +39,62 @@ class ValidationV4 {
         
     }
 
-    public function validate(
+    /**
+     * 
+     * @param Address $address
+     * @param CountryCodeAlpha3Enum $countrycode
+     * @param OutputGeoCodingEnum $geocoding
+     * @throws CurlException
+     * @throws EgonException
+     * @return array
+     */
+    public function getValidAddress(
+            Address $address,
+            CountryCodeAlpha3Enum $countrycode,
+            OutputGeoCodingEnum $geocoding = OutputGeoCodingEnum::GEOCODING_OFF
+    ): array {
+        $arrayContent = $this->validate($address, $countrycode, $geocoding);
+
+        if (empty($arrayContent)) {
+            return [];
+        }
+        return $arrayContent;
+    }
+
+    /**
+     * 
+     * @param Address $address
+     * @param CountryCodeAlpha3Enum $countrycode
+     * @param OutputGeoCodingEnum $geocoding
+     * @return ValidationV4Response|null
+     * @throws EgonException
+     * @throws CurlException
+     */
+    public function getValidAddressMapped(
+            Address $address,
+            CountryCodeAlpha3Enum $countrycode,
+            OutputGeoCodingEnum $geocoding = OutputGeoCodingEnum::GEOCODING_OFF
+    ): ?ValidationV4Response {
+        $arrayContent = $this->validate($address, $countrycode, $geocoding);
+
+        $validationResponse = ValidationV4Mapper::fromArray($arrayContent);
+
+        if (!$validationResponse instanceof ValidationV4Response) {
+            return null;
+        }
+        return $validationResponse;
+    }
+
+    /**
+     * 
+     * @param Address $address
+     * @param CountryCodeAlpha3Enum $countrycode
+     * @param OutputGeoCodingEnum $geocoding
+     * @return array
+     * @throws CurlException
+     * @throws EgonException
+     */
+    private function validate(
             Address $address,
             CountryCodeAlpha3Enum $countrycode,
             OutputGeoCodingEnum $geocoding = OutputGeoCodingEnum::GEOCODING_OFF
@@ -74,14 +130,19 @@ class ValidationV4 {
 
         // Error handler
         if (curl_errno($ch) !== 0) {
-            $msg = 'Errore cURL: ' . curl_error($ch);
+            $msg = 'cURL Error: ' . curl_error($ch);
+            curl_close($ch);
             throw new CurlException($msg);
-        } else {
-            $result = json_decode($response, true, 512, JSON_THROW_ON_ERROR);
         }
 
         // Close curl session
         curl_close($ch);
+
+        $result = json_decode($response, true, 512, JSON_THROW_ON_ERROR);
+
+        if (!empty($result["error"])) {
+            throw new EgonException($result["error"]["message"], (int) $result["error"]["code"]);
+        }
 
         return $result;
     }
