@@ -19,7 +19,7 @@
 
 namespace Egon\Dto\RequestValidationV4;
 
-class Address {
+final class Address {
 
     /** @var int|null Egon code place */
     private ?int $egoncodePlace = null;
@@ -328,11 +328,21 @@ class Address {
         return $result;
     }
 
+    /**
+     * 
+     * @param string $string
+     * @return string
+     */
     private static function snakeToCamel(string $string): string {
         $parts = explode('_', $string);
         return array_shift($parts) . implode('', array_map('ucfirst', $parts));
     }
 
+    /**
+     * 
+     * @param string $input
+     * @return string
+     */
     private static function camelToSnake(string $input): string {
         return strtolower((string) preg_replace('/(?<!^)[A-Z]/', '_$0', $input));
     }

@@ -20,6 +20,7 @@
 namespace Egon\Tests;
 
 use Egon\Dto\RequestValidationV4\Address;
+use Egon\Dto\RequestValidationV4\Parameter;
 use Egon\Dto\ResponseValidationV4\ValidationV4Mapper;
 use Egon\Dto\ResponseValidationV4\ValidationV4Response;
 use Egon\Enum\CountryCodeAlpha3Enum;
@@ -40,11 +41,12 @@ class BasicRemoteTest extends AbstractTestCase {
     public function testRemoteSampleResponse(): void {
         $address = new Address();
         $address->setStreet("Via Pacinotti 4b")->setCity("Verona");
+        $parameter = new Parameter(CountryCodeAlpha3Enum::ITALY, OutputGeoCodingEnum::GEOCODING_ON);
 
         try {
             $token = "";
             $v = new ValidationV4($token);
-            $arrayContent = $v->getValidAddress($address, CountryCodeAlpha3Enum::ITALY, OutputGeoCodingEnum::GEOCODING_ON);
+            $arrayContent = $v->getValidAddress($address, $parameter);
         } catch (Exception $e) {
             $msg = "Exception: " . $e->getMessage() . PHP_EOL;
             fwrite(STDERR, $msg);

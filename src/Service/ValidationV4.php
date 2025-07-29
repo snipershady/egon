@@ -20,10 +20,9 @@
 namespace Egon\Service;
 
 use Egon\Dto\RequestValidationV4\Address;
+use Egon\Dto\RequestValidationV4\Parameter;
 use Egon\Dto\ResponseValidationV4\ValidationV4Mapper;
 use Egon\Dto\ResponseValidationV4\ValidationV4Response;
-use Egon\Enum\CountryCodeAlpha3Enum;
-use Egon\Enum\OutputGeoCodingEnum;
 use Egon\Exception\CurlException;
 use Egon\Exception\EgonException;
 
@@ -44,18 +43,16 @@ class ValidationV4 {
     /**
      * 
      * @param Address $address
-     * @param CountryCodeAlpha3Enum $countrycode
-     * @param OutputGeoCodingEnum $geocoding
+     * @param Parameter $parameter
      * @throws CurlException
      * @throws EgonException
      * @return array
      */
     public function getValidAddress(
             Address $address,
-            CountryCodeAlpha3Enum $countrycode,
-            OutputGeoCodingEnum $geocoding = OutputGeoCodingEnum::GEOCODING_OFF
+            Parameter $parameter
     ): array {
-        $arrayContent = $this->validate($address, $countrycode, $geocoding);
+        $arrayContent = $this->validate($address, $parameter);
 
         if (empty($arrayContent)) {
             return [];
@@ -66,18 +63,16 @@ class ValidationV4 {
     /**
      * 
      * @param Address $address
-     * @param CountryCodeAlpha3Enum $countrycode
-     * @param OutputGeoCodingEnum $geocoding
+     * @param Parameter $parameter
      * @return ValidationV4Response
      * @throws EgonException
      * @throws CurlException
      */
     public function getValidAddressMapped(
             Address $address,
-            CountryCodeAlpha3Enum $countrycode,
-            OutputGeoCodingEnum $geocoding = OutputGeoCodingEnum::GEOCODING_OFF
+            Parameter $parameter
     ): ValidationV4Response {
-        $arrayContent = $this->validate($address, $countrycode, $geocoding);
+        $arrayContent = $this->validate($address, $parameter);
 
         return ValidationV4Mapper::fromArray($arrayContent);
     }
@@ -85,23 +80,18 @@ class ValidationV4 {
     /**
      * 
      * @param Address $address
-     * @param CountryCodeAlpha3Enum $countrycode
-     * @param OutputGeoCodingEnum $geocoding
+     * @param Parameter $parameter
      * @return array
      * @throws CurlException
      * @throws EgonException
      */
     private function validate(
             Address $address,
-            CountryCodeAlpha3Enum $countrycode,
-            OutputGeoCodingEnum $geocoding = OutputGeoCodingEnum::GEOCODING_OFF
+            Parameter $parameter
     ): array {
         // Payload JSON
         $payload = [
-            'par' => [
-                'iso3' => $countrycode->value,
-                'geo' => $geocoding->value,
-            ],
+            'par' => $parameter->toArray(),
             'data' => [
                 'address' => $address->toArray(),
             ]
