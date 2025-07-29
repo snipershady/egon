@@ -5,6 +5,9 @@ A lightweight and modern PHP library for seamless integration with the Egon API.
 
 Egon website: https://www.egon.com/
 
+## API implementation
+ - v4/validation/address 
+
 ## LICENSE
 
 This is an unofficial package provided with a GPL3 license for helping in the implementation of Egon service.
