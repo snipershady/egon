@@ -258,7 +258,7 @@ class Address {
 
     /**
      *
-     * @return RequestValidationV4Address
+     * @return Address
      */
     public static function fromArray(array $data): Address {
         $address = new Address();
@@ -272,6 +272,10 @@ class Address {
         return $address;
     }
 
+    /**
+     * 
+     * @return array
+     */
     public function toArray(): array {
         $fields = [
             'egoncodePlace',

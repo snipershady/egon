@@ -77,7 +77,7 @@ class BasicRemoteTest extends AbstractTestCase {
         $this->assertEquals('Verona', $standard->getProvince());
         $this->assertEquals('VR', $standard->getProvinceCode());
         $this->assertEquals('Verona', $standard->getCity());
-        //$this->assertEquals('37135', $standard->getZipcode());
+        $this->assertEquals('37135', $standard->getZipcode());
         $this->assertEquals('Via', $standard->getStreetType());
         $this->assertEquals('Antonio Pacinotti', $standard->getStreetName());
         $this->assertEquals('Via Antonio Pacinotti', $standard->getStreet());

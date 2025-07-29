@@ -3,6 +3,8 @@
 namespace Egon\Service;
 
 use Egon\Dto\RequestValidationV4\Address;
+use Egon\Dto\ResponseValidationV4\ValidationV4Mapper;
+use Egon\Dto\ResponseValidationV4\ValidationV4Response;
 use Egon\Enum\CountryCodeAlpha3Enum;
 use Egon\Enum\OutputGeoCodingEnum;
 use Egon\Exception\CurlException;
@@ -66,7 +68,7 @@ class ValidationV4 {
      * @param Address $address
      * @param CountryCodeAlpha3Enum $countrycode
      * @param OutputGeoCodingEnum $geocoding
-     * @return ValidationV4Response|null
+     * @return ValidationV4Response
      * @throws EgonException
      * @throws CurlException
      */
@@ -74,15 +76,10 @@ class ValidationV4 {
             Address $address,
             CountryCodeAlpha3Enum $countrycode,
             OutputGeoCodingEnum $geocoding = OutputGeoCodingEnum::GEOCODING_OFF
-    ): ?ValidationV4Response {
+    ): ValidationV4Response {
         $arrayContent = $this->validate($address, $countrycode, $geocoding);
 
-        $validationResponse = ValidationV4Mapper::fromArray($arrayContent);
-
-        if (!$validationResponse instanceof ValidationV4Response) {
-            return null;
-        }
-        return $validationResponse;
+        return ValidationV4Mapper::fromArray($arrayContent);
     }
 
     /**
