@@ -27,89 +27,38 @@ use Egon\Exception\CurlException;
 use Egon\Exception\EgonException;
 
 /**
- * Description of ValidationV4
+ * Description of Balance
  *
  * @author Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
  */
-final class ValidationV4 {
+final class Balance {
 
+    /**
+     * 
+     * @param string $token
+     * @param string $url
+     */
     public function __construct(
             private readonly string $token,
-            private readonly string $url = "https://api.egon.com/v4/validation/address"
+            private readonly string $url = "https://api.egon.com/account/balance"
     ) {
         
     }
 
     /**
      * 
-     * @param Address $address
-     * @param Parameter $parameter
-     * @throws CurlException
-     * @throws EgonException
-     * @return array
-     */
-    public function getValidAddress(
-            Address $address,
-            Parameter $parameter
-    ): array {
-        $arrayContent = $this->validate($address, $parameter);
-
-        if (empty($arrayContent)) {
-            return [];
-        }
-        return $arrayContent;
-    }
-
-    /**
-     * 
-     * @param Address $address
-     * @param Parameter $parameter
-     * @return ValidationV4Response
-     * @throws EgonException
-     * @throws CurlException
-     */
-    public function getValidAddressMapped(
-            Address $address,
-            Parameter $parameter
-    ): ValidationV4Response {
-        $arrayContent = $this->validate($address, $parameter);
-
-        return ValidationV4Mapper::fromArray($arrayContent);
-    }
-
-    /**
-     * 
-     * @param Address $address
-     * @param Parameter $parameter
-     * @return array
+     * @param string $token
+     * @return float
      * @throws CurlException
      * @throws EgonException
      */
-    private function validate(
-            Address $address,
-            Parameter $parameter
-    ): array {
-        // Payload JSON
-        $payload = [
-            'par' => $parameter->toArray(),
-            'data' => [
-                'address' => $address->toArray(),
-            ]
-        ];
-
-        // init cURL Session
+    public function getBalance(): float {
         $ch = curl_init($this->url);
-
-        // URL options
         curl_setopt_array($ch, [
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_POST => true,
+            CURLOPT_RETURNTRANSFER => true, // Per ottenere la risposta come stringa
             CURLOPT_HTTPHEADER => [
                 'Authorization: Bearer ' . $this->token,
-                'Content-Type: application/json',
-                'Accept: application/json',
             ],
-            CURLOPT_POSTFIELDS => json_encode($payload),
         ]);
 
         // Curl request
@@ -126,11 +75,10 @@ final class ValidationV4 {
         curl_close($ch);
 
         $result = json_decode($response, true, 512, JSON_THROW_ON_ERROR);
-
-        if (!empty($result["error"])) {
-            throw new EgonException($result["error"]["message"], (int) $result["error"]["code"]);
+        if (empty($result["balance"])) {
+            throw new EgonException("Balance call, failed");
         }
 
-        return $result;
+        return (float) $result["balance"];
     }
 }
