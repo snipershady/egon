@@ -2,6 +2,11 @@
 
 namespace Egon\Service;
 
+use Egon\Dto\RequestValidationV4\Address;
+use Egon\Enum\CountryCodeAlpha3Enum;
+use Egon\Enum\OutputGeoCodingEnum;
+use Egon\Exception\CurlException;
+
 /*
  * Copyright (C) 2022 Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
  *
@@ -27,31 +32,32 @@ namespace Egon\Service;
 class ValidationV4 {
 
     public function __construct(
-            private readonly string $url = "https://api.egon.com/v4/validation/address",
-            private readonly string $token = ""
+            private string $token,
+            private readonly string $url = "https://api.egon.com/v4/validation/address"
     ) {
         
     }
 
-    public function validate(): array {
+    public function validate(
+            Address $address,
+            CountryCodeAlpha3Enum $countrycode,
+            OutputGeoCodingEnum $geocoding = OutputGeoCodingEnum::GEOCODING_OFF
+    ): array {
         // Payload JSON
         $payload = [
             'par' => [
-                'iso3' => 'ITA',
-                'geo' => 'S',
+                'iso3' => $countrycode->value,
+                'geo' => $geocoding->value,
             ],
             'data' => [
-                'address' => [
-                    'city' => 'Verona',
-                    'street' => 'Via Pacinotti 4b',
-                ],
-            ],
+                'address' => $address->toArray(),
+            ]
         ];
 
-        // Inizializza la sessione cURL
+        // init cURL Session
         $ch = curl_init($this->url);
 
-        // Imposta le opzioni cURL
+        // URL options
         curl_setopt_array($ch, [
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POST => true,
@@ -63,18 +69,18 @@ class ValidationV4 {
             CURLOPT_POSTFIELDS => json_encode($payload),
         ]);
 
-        // Esegui la richiesta
+        // Curl request
         $response = curl_exec($ch);
 
-        // Gestisci eventuali errori
+        // Error handler
         if (curl_errno($ch) !== 0) {
-            echo 'Errore cURL: ' . curl_error($ch);
+            $msg = 'Errore cURL: ' . curl_error($ch);
+            throw new CurlException($msg);
         } else {
-            // Decodifica la risposta JSON
             $result = json_decode($response, true, 512, JSON_THROW_ON_ERROR);
         }
 
-        // Chiudi la sessione cURL
+        // Close curl session
         curl_close($ch);
 
         return $result;

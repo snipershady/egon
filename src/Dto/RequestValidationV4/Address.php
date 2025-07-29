@@ -272,7 +272,7 @@ class Address {
         return $address;
     }
 
-    public static function toArray(Address $address): array {
+    public function toArray(): array {
         $fields = [
             'egoncodePlace',
             'egoncodeHn',
@@ -301,7 +301,7 @@ class Address {
         foreach ($fields as $field) {
             $getter = 'get' . ucfirst($field);
             $snakeKey = self::camelToSnake($field);
-            $result[$snakeKey] = $address->$getter();
+            $result[$snakeKey] = $this->$getter();
         }
 
         return $result;
