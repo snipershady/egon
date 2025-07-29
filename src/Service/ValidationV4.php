@@ -32,7 +32,7 @@ use Egon\Exception\CurlException;
 class ValidationV4 {
 
     public function __construct(
-            private string $token,
+            private readonly string $token,
             private readonly string $url = "https://api.egon.com/v4/validation/address"
     ) {
         

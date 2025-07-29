@@ -2,15 +2,10 @@
 
 declare(strict_types=1);
 
-use Rector\CodeQuality\Rector\Foreach_\UnusedForeachValueToArrayKeysRector;
-use Rector\CodeQuality\Rector\FunctionLike\SimplifyUselessVariableRector;
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessParamTagRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessReturnTagRector;
-use Rector\DeadCode\Rector\Foreach_\RemoveUnusedForeachKeyRector;
-use Rector\Php84\Rector\MethodCall\NewMethodCallWithoutParenthesesRector;
 use Rector\Set\ValueObject\LevelSetList;
-use Rector\Symfony\CodeQuality\Rector\Class_\InlineClassRoutePrefixRector;
 use Rector\ValueObject\PhpVersion;
 
 return RectorConfig::configure()
@@ -23,8 +18,8 @@ return RectorConfig::configure()
                     //NewMethodCallWithoutParenthesesRector::class,
                     //UnusedForeachValueToArrayKeysRector::class,
                     //RemoveUnusedForeachKeyRector::class,
-                    //RemoveUselessParamTagRector::class,
-                    //RemoveUselessReturnTagRector::class
+                    RemoveUselessParamTagRector::class,
+                    RemoveUselessReturnTagRector::class
                     //SimplifyUselessVariableRector::class
                 ])
                 ->withPreparedSets(
