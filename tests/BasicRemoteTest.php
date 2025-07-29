@@ -1,16 +1,5 @@
 <?php
 
-namespace Egon\Tests;
-
-use Egon\Dto\RequestValidationV4\Address;
-use Egon\Dto\ResponseValidationV4\ValidationV4Mapper;
-use Egon\Dto\ResponseValidationV4\ValidationV4Response;
-use Egon\Enum\CountryCodeAlpha3Enum;
-use Egon\Enum\OutputGeoCodingEnum;
-use Egon\Service\ValidationV4;
-use Exception;
-use Throwable;
-
 /*
  * Copyright (C) 2022 Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
  *
@@ -27,6 +16,17 @@ use Throwable;
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+namespace Egon\Tests;
+
+use Egon\Dto\RequestValidationV4\Address;
+use Egon\Dto\ResponseValidationV4\ValidationV4Mapper;
+use Egon\Dto\ResponseValidationV4\ValidationV4Response;
+use Egon\Enum\CountryCodeAlpha3Enum;
+use Egon\Enum\OutputGeoCodingEnum;
+use Egon\Service\ValidationV4;
+use Exception;
+use Throwable;
 
 /**
  * Description of AbstractTestCase

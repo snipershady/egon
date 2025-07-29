@@ -1,7 +1,5 @@
 <?php
 
-namespace Egon\Enum;
-
 /*
  * Copyright (C) 2022 Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
  *
@@ -18,6 +16,8 @@ namespace Egon\Enum;
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+namespace Egon\Enum;
 
 /**
  * Description of OutputDescriptionEnum

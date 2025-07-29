@@ -1,7 +1,5 @@
 <?php
 
-namespace Egon\Dto\ResponseValidationV4;
-
 /*
  * Copyright (C) 2022 Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
  *
@@ -18,6 +16,8 @@ namespace Egon\Dto\ResponseValidationV4;
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+namespace Egon\Dto\ResponseValidationV4;
 
 class ValidationV4AdmCode {
 
@@ -42,12 +42,12 @@ class ValidationV4AdmCode {
         return $this;
     }
 
-    public function setType(string $type) : static{
+    public function setType(string $type): static {
         $this->type = $type;
         return $this;
     }
 
-    public function setValue(string $value) : static{
+    public function setValue(string $value): static {
         $this->value = $value;
         return $this;
     }

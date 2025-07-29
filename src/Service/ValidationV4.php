@@ -1,15 +1,5 @@
 <?php
 
-namespace Egon\Service;
-
-use Egon\Dto\RequestValidationV4\Address;
-use Egon\Dto\ResponseValidationV4\ValidationV4Mapper;
-use Egon\Dto\ResponseValidationV4\ValidationV4Response;
-use Egon\Enum\CountryCodeAlpha3Enum;
-use Egon\Enum\OutputGeoCodingEnum;
-use Egon\Exception\CurlException;
-use Egon\Exception\EgonException;
-
 /*
  * Copyright (C) 2022 Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
  *
@@ -26,6 +16,16 @@ use Egon\Exception\EgonException;
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+namespace Egon\Service;
+
+use Egon\Dto\RequestValidationV4\Address;
+use Egon\Dto\ResponseValidationV4\ValidationV4Mapper;
+use Egon\Dto\ResponseValidationV4\ValidationV4Response;
+use Egon\Enum\CountryCodeAlpha3Enum;
+use Egon\Enum\OutputGeoCodingEnum;
+use Egon\Exception\CurlException;
+use Egon\Exception\EgonException;
 
 /**
  * Description of ValidationV4

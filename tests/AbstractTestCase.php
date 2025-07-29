@@ -1,11 +1,5 @@
 <?php
 
-namespace Egon\Tests;
-
-require_once __DIR__ . '/../vendor/autoload.php';
-
-use PHPUnit\Framework\TestCase;
-
 /*
  * Copyright (C) 2022 Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
  *
@@ -22,6 +16,12 @@ use PHPUnit\Framework\TestCase;
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+namespace Egon\Tests;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use PHPUnit\Framework\TestCase;
 
 /**
  * Description of AbstractTestCase
