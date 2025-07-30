@@ -19,10 +19,6 @@
 
 namespace Egon\Service;
 
-use Egon\Dto\RequestValidationV4\Address;
-use Egon\Dto\RequestValidationV4\Parameter;
-use Egon\Dto\ResponseValidationV4\ValidationV4Mapper;
-use Egon\Dto\ResponseValidationV4\ValidationV4Response;
 use Egon\Exception\CurlException;
 use Egon\Exception\EgonException;
 
@@ -31,7 +27,7 @@ use Egon\Exception\EgonException;
  *
  * @author Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
  */
-final class Balance {
+final readonly class Balance {
 
     /**
      * 
@@ -39,8 +35,8 @@ final class Balance {
      * @param string $url
      */
     public function __construct(
-            private readonly string $token,
-            private readonly string $url = "https://api.egon.com/account/balance"
+            private string $token,
+            private string $url = "https://api.egon.com/account/balance"
     ) {
         
     }
@@ -61,17 +57,14 @@ final class Balance {
             ],
         ]);
 
-        // Curl request
         $response = curl_exec($ch);
 
-        // Error handler
         if (curl_errno($ch) !== 0) {
             $msg = 'cURL Error: ' . curl_error($ch);
             curl_close($ch);
             throw new CurlException($msg);
         }
-
-        // Close curl session
+        
         curl_close($ch);
 
         $result = json_decode($response, true, 512, JSON_THROW_ON_ERROR);

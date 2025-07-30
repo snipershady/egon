@@ -31,11 +31,11 @@ use Egon\Exception\EgonException;
  *
  * @author Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
  */
-final class ValidationV4 {
+final readonly class ValidationV4 {
 
     public function __construct(
-            private readonly string $token,
-            private readonly string $url = "https://api.egon.com/v4/validation/address"
+            private string $token,
+            private string $url = "https://api.egon.com/v4/validation/address"
     ) {
         
     }
