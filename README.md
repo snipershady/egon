@@ -7,11 +7,11 @@ Egon website: https://www.egon.com/
 
 ## API implementation
  - v4/validation/address 
+ - balance
 
 ## LICENSE
 
 This is an unofficial package provided with a GPL3 license for helping in the implementation of Egon service.
-
 
 Copyright (C) 2022 Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
 
