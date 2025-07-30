@@ -80,3 +80,19 @@ $v = new ValidationV4($token);
 $validateResponse = $v->getValidAddressMapped($address, $parameter);
 
 ```
+
+## Balance
+
+```php
+
+use Egon\Dto\ResponseValidationV4\ValidationV4Mapper;
+use Egon\Dto\ResponseValidationV4\ValidationV4Response;
+use RuntimeException;
+use Throwable;
+
+
+$token = "YOUR_API_TOKEN";
+$b = new Balance($token);
+$balanceValue = $b->getBalance(); //this method returns a float value with number of credits
+
+```
