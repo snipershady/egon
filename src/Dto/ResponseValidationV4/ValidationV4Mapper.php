@@ -64,9 +64,9 @@ final class ValidationV4Mapper {
                     $std->setAdmCode($admCodes);
                 } elseif ($k === 'egon_code') {
                     $egon = new ValidationV4EgonCode();
-                    $egon->setCity($v['city']);
-                    $egon->setStreet($v['street']);
-                    $egon->setHn($v['hn']);
+                    $egon->setCity($v['city'] ?? "");
+                    $egon->setStreet($v['street'] ?? "");
+                    $egon->setHn($v['hn'] ?? "");
                     $std->setEgonCode($egon);
                 } else {
                     $method = 'set' . ucfirst($camelKey);
