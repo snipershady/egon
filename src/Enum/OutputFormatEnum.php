@@ -20,12 +20,12 @@
 namespace Egon\Enum;
 
 /**
- * Description of OutputFormatEnum
+ * Description of OutputFormatEnum.
  *
  * @author Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
  */
-enum OutputFormatEnum: string {
-
+enum OutputFormatEnum: string
+{
     case CAPITALIZED = 'C';
     case UPPERCASE = 'M';
     case UPPERCASE_WITHOUT_ACCENTS = 'T';

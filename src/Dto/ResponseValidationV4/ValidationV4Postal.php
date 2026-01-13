@@ -19,26 +19,32 @@
 
 namespace Egon\Dto\ResponseValidationV4;
 
-class ValidationV4Postal {
-
+class ValidationV4Postal
+{
     private ?string $row4 = null;
     private ?string $row5 = null;
 
-    public function getRow4(): ?string {
+    public function getRow4(): ?string
+    {
         return $this->row4;
     }
 
-    public function getRow5(): ?string {
+    public function getRow5(): ?string
+    {
         return $this->row5;
     }
 
-    public function setRow4(?string $row4): static {
+    public function setRow4(?string $row4): static
+    {
         $this->row4 = $row4;
+
         return $this;
     }
 
-    public function setRow5(?string $row5): static {
+    public function setRow5(?string $row5): static
+    {
         $this->row5 = $row5;
+
         return $this;
     }
 }

@@ -19,36 +19,45 @@
 
 namespace Egon\Dto\ResponseValidationV4;
 
-final class ValidationV4QualityAddress {
-
+final class ValidationV4QualityAddress
+{
     private ?ValidationV4QualityField $locality = null;
     private ?ValidationV4QualityField $street = null;
     private ?ValidationV4QualityField $hn = null;
 
-    public function getLocality(): ?ValidationV4QualityField {
+    public function getLocality(): ?ValidationV4QualityField
+    {
         return $this->locality;
     }
 
-    public function getStreet(): ?ValidationV4QualityField {
+    public function getStreet(): ?ValidationV4QualityField
+    {
         return $this->street;
     }
 
-    public function getHn(): ?ValidationV4QualityField {
+    public function getHn(): ?ValidationV4QualityField
+    {
         return $this->hn;
     }
 
-    public function setLocality(?ValidationV4QualityField $locality): static {
-        $this->locality = $locality;
+    public function setLocality(?ValidationV4QualityField $validationV4QualityField): static
+    {
+        $this->locality = $validationV4QualityField;
+
         return $this;
     }
 
-    public function setStreet(?ValidationV4QualityField $street): static {
-        $this->street = $street;
+    public function setStreet(?ValidationV4QualityField $validationV4QualityField): static
+    {
+        $this->street = $validationV4QualityField;
+
         return $this;
     }
 
-    public function setHn(?ValidationV4QualityField $hn): static {
-        $this->hn = $hn;
+    public function setHn(?ValidationV4QualityField $validationV4QualityField): static
+    {
+        $this->hn = $validationV4QualityField;
+
         return $this;
     }
 }

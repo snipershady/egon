@@ -19,36 +19,45 @@
 
 namespace Egon\Dto\ResponseValidationV4;
 
-class ValidationV4Data {
+class ValidationV4Data
+{
+    private ?ValidationV4Address $validationV4Address = null;
+    private ?ValidationV4Geo $validationV4Geo = null;
+    private ?ValidationV4Postal $validationV4Postal = null;
 
-    private ?ValidationV4Address $address = null;
-    private ?ValidationV4Geo $geo = null;
-    private ?ValidationV4Postal $postal = null;
-
-    public function getAddress(): ?ValidationV4Address {
-        return $this->address;
+    public function getAddress(): ?ValidationV4Address
+    {
+        return $this->validationV4Address;
     }
 
-    public function getGeo(): ?ValidationV4Geo {
-        return $this->geo;
+    public function getGeo(): ?ValidationV4Geo
+    {
+        return $this->validationV4Geo;
     }
 
-    public function getPostal(): ?ValidationV4Postal {
-        return $this->postal;
+    public function getPostal(): ?ValidationV4Postal
+    {
+        return $this->validationV4Postal;
     }
 
-    public function setAddress(?ValidationV4Address $address): static {
-        $this->address = $address;
+    public function setAddress(?ValidationV4Address $validationV4Address): static
+    {
+        $this->validationV4Address = $validationV4Address;
+
         return $this;
     }
 
-    public function setGeo(?ValidationV4Geo $geo): static {
-        $this->geo = $geo;
+    public function setGeo(?ValidationV4Geo $validationV4Geo): static
+    {
+        $this->validationV4Geo = $validationV4Geo;
+
         return $this;
     }
 
-    public function setPostal(?ValidationV4Postal $postal): static {
-        $this->postal = $postal;
+    public function setPostal(?ValidationV4Postal $validationV4Postal): static
+    {
+        $this->validationV4Postal = $validationV4Postal;
+
         return $this;
     }
 }

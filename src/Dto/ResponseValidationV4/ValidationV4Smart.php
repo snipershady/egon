@@ -19,56 +19,71 @@
 
 namespace Egon\Dto\ResponseValidationV4;
 
-final class ValidationV4Smart {
-
+final class ValidationV4Smart
+{
     private ?string $country = null;
     private ?string $administrativeLevel = null;
     private ?string $city = null;
     private ?string $address = null;
     private ?string $zipcode = null;
 
-    public function getCountry(): ?string {
+    public function getCountry(): ?string
+    {
         return $this->country;
     }
 
-    public function getAdministrativeLevel(): ?string {
+    public function getAdministrativeLevel(): ?string
+    {
         return $this->administrativeLevel;
     }
 
-    public function getCity(): ?string {
+    public function getCity(): ?string
+    {
         return $this->city;
     }
 
-    public function getAddress(): ?string {
+    public function getAddress(): ?string
+    {
         return $this->address;
     }
 
-    public function getZipcode(): ?string {
+    public function getZipcode(): ?string
+    {
         return $this->zipcode;
     }
 
-    public function setCountry(?string $country): static {
+    public function setCountry(?string $country): static
+    {
         $this->country = $country;
+
         return $this;
     }
 
-    public function setAdministrativeLevel(?string $administrativeLevel): static {
+    public function setAdministrativeLevel(?string $administrativeLevel): static
+    {
         $this->administrativeLevel = $administrativeLevel;
+
         return $this;
     }
 
-    public function setCity(?string $city): static {
+    public function setCity(?string $city): static
+    {
         $this->city = $city;
+
         return $this;
     }
 
-    public function setAddress(?string $address): static {
+    public function setAddress(?string $address): static
+    {
         $this->address = $address;
+
         return $this;
     }
 
-    public function setZipcode(?string $zipcode): static {
+    public function setZipcode(?string $zipcode): static
+    {
         $this->zipcode = $zipcode;
+
         return $this;
     }
 }

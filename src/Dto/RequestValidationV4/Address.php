@@ -19,8 +19,8 @@
 
 namespace Egon\Dto\RequestValidationV4;
 
-final class Address {
-
+final class Address
+{
     /** @var int|null Egon code place */
     private ?int $egoncodePlace = null;
 
@@ -84,216 +84,273 @@ final class Address {
     /** @var string|null House number 2 */
     private ?string $hn2 = null;
 
-    public function getEgoncodePlace(): ?int {
+    public function getEgoncodePlace(): ?int
+    {
         return $this->egoncodePlace;
     }
 
-    public function getEgoncodeHn(): ?int {
+    public function getEgoncodeHn(): ?int
+    {
         return $this->egoncodeHn;
     }
 
-    public function getCountry(): ?string {
+    public function getCountry(): ?string
+    {
         return $this->country;
     }
 
-    public function getState(): ?string {
+    public function getState(): ?string
+    {
         return $this->state;
     }
 
-    public function getRegion(): ?string {
+    public function getRegion(): ?string
+    {
         return $this->region;
     }
 
-    public function getProvince(): ?string {
+    public function getProvince(): ?string
+    {
         return $this->province;
     }
 
-    public function getCity(): ?string {
+    public function getCity(): ?string
+    {
         return $this->city;
     }
 
-    public function getDistrict1(): ?string {
+    public function getDistrict1(): ?string
+    {
         return $this->district1;
     }
 
-    public function getDistrict2(): ?string {
+    public function getDistrict2(): ?string
+    {
         return $this->district2;
     }
 
-    public function getDistrict3(): ?string {
+    public function getDistrict3(): ?string
+    {
         return $this->district3;
     }
 
-    public function getZipcode(): ?string {
+    public function getZipcode(): ?string
+    {
         return $this->zipcode;
     }
 
-    public function getStreetType(): ?string {
+    public function getStreetType(): ?string
+    {
         return $this->streetType;
     }
 
-    public function getStreet(): ?string {
+    public function getStreet(): ?string
+    {
         return $this->street;
     }
 
-    public function getAddress(): ?string {
+    public function getAddress(): ?string
+    {
         return $this->address;
     }
 
-    public function getHn(): ?string {
+    public function getHn(): ?string
+    {
         return $this->hn;
     }
 
-    public function getBuilding(): ?string {
+    public function getBuilding(): ?string
+    {
         return $this->building;
     }
 
-    public function getSubBuilding(): ?string {
+    public function getSubBuilding(): ?string
+    {
         return $this->subBuilding;
     }
 
-    public function getOrganization(): ?string {
+    public function getOrganization(): ?string
+    {
         return $this->organization;
     }
 
-    public function getStreetTypeStr2(): ?string {
+    public function getStreetTypeStr2(): ?string
+    {
         return $this->streetTypeStr2;
     }
 
-    public function getStreet2(): ?string {
+    public function getStreet2(): ?string
+    {
         return $this->street2;
     }
 
-    public function getHn2(): ?string {
+    public function getHn2(): ?string
+    {
         return $this->hn2;
     }
 
-    public function setEgoncodePlace(?int $egoncodePlace): static {
+    public function setEgoncodePlace(?int $egoncodePlace): static
+    {
         $this->egoncodePlace = $egoncodePlace;
+
         return $this;
     }
 
-    public function setEgoncodeHn(?int $egoncodeHn): static {
+    public function setEgoncodeHn(?int $egoncodeHn): static
+    {
         $this->egoncodeHn = $egoncodeHn;
+
         return $this;
     }
 
-    public function setCountry(?string $country): static {
+    public function setCountry(?string $country): static
+    {
         $this->country = $country;
+
         return $this;
     }
 
-    public function setState(?string $state): static {
+    public function setState(?string $state): static
+    {
         $this->state = $state;
+
         return $this;
     }
 
-    public function setRegion(?string $region): static {
+    public function setRegion(?string $region): static
+    {
         $this->region = $region;
+
         return $this;
     }
 
-    public function setProvince(?string $province): static {
+    public function setProvince(?string $province): static
+    {
         $this->province = $province;
+
         return $this;
     }
 
-    public function setCity(?string $city): static {
+    public function setCity(?string $city): static
+    {
         $this->city = $city;
+
         return $this;
     }
 
-    public function setDistrict1(?string $district1): static {
+    public function setDistrict1(?string $district1): static
+    {
         $this->district1 = $district1;
+
         return $this;
     }
 
-    public function setDistrict2(?string $district2): static {
+    public function setDistrict2(?string $district2): static
+    {
         $this->district2 = $district2;
+
         return $this;
     }
 
-    public function setDistrict3(?string $district3): static {
+    public function setDistrict3(?string $district3): static
+    {
         $this->district3 = $district3;
+
         return $this;
     }
 
-    public function setZipcode(?string $zipcode): static {
+    public function setZipcode(?string $zipcode): static
+    {
         $this->zipcode = $zipcode;
+
         return $this;
     }
 
-    public function setStreetType(?string $streetType): static {
+    public function setStreetType(?string $streetType): static
+    {
         $this->streetType = $streetType;
+
         return $this;
     }
 
-    public function setStreet(?string $street): static {
+    public function setStreet(?string $street): static
+    {
         $this->street = $street;
+
         return $this;
     }
 
-    public function setAddress(?string $address): static {
+    public function setAddress(?string $address): static
+    {
         $this->address = $address;
+
         return $this;
     }
 
-    public function setHn(?string $hn): static {
+    public function setHn(?string $hn): static
+    {
         $this->hn = $hn;
+
         return $this;
     }
 
-    public function setBuilding(?string $building): static {
+    public function setBuilding(?string $building): static
+    {
         $this->building = $building;
+
         return $this;
     }
 
-    public function setSubBuilding(?string $subBuilding): static {
+    public function setSubBuilding(?string $subBuilding): static
+    {
         $this->subBuilding = $subBuilding;
+
         return $this;
     }
 
-    public function setOrganization(?string $organization): static {
+    public function setOrganization(?string $organization): static
+    {
         $this->organization = $organization;
+
         return $this;
     }
 
-    public function setStreetTypeStr2(?string $streetTypeStr2): static {
+    public function setStreetTypeStr2(?string $streetTypeStr2): static
+    {
         $this->streetTypeStr2 = $streetTypeStr2;
+
         return $this;
     }
 
-    public function setStreet2(?string $street2): static {
+    public function setStreet2(?string $street2): static
+    {
         $this->street2 = $street2;
+
         return $this;
     }
 
-    public function setHn2(?string $hn2): static {
+    public function setHn2(?string $hn2): static
+    {
         $this->hn2 = $hn2;
+
         return $this;
     }
 
-    /**
-     *
-     * @return Address
-     */
-    public static function fromArray(array $data): Address {
+    public static function fromArray(array $data): Address
+    {
         $address = new Address();
 
         foreach ($data as $key => $value) {
             $camelKey = self::snakeToCamel($key);
-            $setter = 'set' . ucfirst($camelKey);
+            $setter = 'set'.ucfirst($camelKey);
             $address->$setter($value);
         }
 
         return $address;
     }
 
-    /**
-     * 
-     * @return array
-     */
-    public function toArray(): array {
+    public function toArray(): array
+    {
         $fields = [
             'egoncodePlace',
             'egoncodeHn',
@@ -315,12 +372,12 @@ final class Address {
             'organization',
             'streetTypeStr2',
             'street2',
-            'hn2'
+            'hn2',
         ];
 
         $result = [];
         foreach ($fields as $field) {
-            $getter = 'get' . ucfirst($field);
+            $getter = 'get'.ucfirst($field);
             $snakeKey = self::camelToSnake($field);
             $result[$snakeKey] = $this->$getter();
         }
@@ -328,22 +385,15 @@ final class Address {
         return $result;
     }
 
-    /**
-     * 
-     * @param string $string
-     * @return string
-     */
-    private static function snakeToCamel(string $string): string {
+    private static function snakeToCamel(string $string): string
+    {
         $parts = explode('_', $string);
-        return array_shift($parts) . implode('', array_map('ucfirst', $parts));
+
+        return array_shift($parts).implode('', array_map(ucfirst(...), $parts));
     }
 
-    /**
-     * 
-     * @param string $input
-     * @return string
-     */
-    private static function camelToSnake(string $input): string {
+    private static function camelToSnake(string $input): string
+    {
         return strtolower((string) preg_replace('/(?<!^)[A-Z]/', '_$0', $input));
     }
 }

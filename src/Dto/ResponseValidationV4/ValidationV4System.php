@@ -19,26 +19,32 @@
 
 namespace Egon\Dto\ResponseValidationV4;
 
-final class ValidationV4System {
-
+final class ValidationV4System
+{
     private ?string $retCode = null;
     private ?string $desRetCode = null;
 
-    public function getRetCode(): ?string {
+    public function getRetCode(): ?string
+    {
         return $this->retCode;
     }
 
-    public function getDesRetCode(): ?string {
+    public function getDesRetCode(): ?string
+    {
         return $this->desRetCode;
     }
 
-    public function setRetCode(?string $retCode): static {
+    public function setRetCode(?string $retCode): static
+    {
         $this->retCode = $retCode;
+
         return $this;
     }
 
-    public function setDesRetCode(?string $desRetCode): static {
+    public function setDesRetCode(?string $desRetCode): static
+    {
         $this->desRetCode = $desRetCode;
+
         return $this;
     }
 }

@@ -19,36 +19,45 @@
 
 namespace Egon\Dto\ResponseValidationV4;
 
-class ValidationV4EgonCode {
-
+class ValidationV4EgonCode
+{
     private ?string $city = null;
     private ?string $street = null;
     private ?string $hn = null;
 
-    public function getCity(): ?string {
+    public function getCity(): ?string
+    {
         return $this->city;
     }
 
-    public function getStreet(): ?string {
+    public function getStreet(): ?string
+    {
         return $this->street;
     }
 
-    public function getHn(): ?string {
+    public function getHn(): ?string
+    {
         return $this->hn;
     }
 
-    public function setCity(?string $city): static {
+    public function setCity(?string $city): static
+    {
         $this->city = $city;
+
         return $this;
     }
 
-    public function setStreet(?string $street): static {
+    public function setStreet(?string $street): static
+    {
         $this->street = $street;
+
         return $this;
     }
 
-    public function setHn(?string $hn): static {
+    public function setHn(?string $hn): static
+    {
         $this->hn = $hn;
+
         return $this;
     }
 }

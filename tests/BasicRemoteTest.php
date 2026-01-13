@@ -44,11 +44,11 @@ class BasicRemoteTest extends AbstractTestCase {
         $parameter = new Parameter(CountryCodeAlpha3Enum::ITALY, OutputGeoCodingEnum::GEOCODING_ON);
 
         try {
-            $token = "";
-            $v = new ValidationV4($token);
-            $arrayContent = $v->getValidAddress($address, $parameter);
-        } catch (Exception $e) {
-            $msg = "Exception: " . $e->getMessage() . PHP_EOL;
+            $token = "INSERT_A_VALID_KEY";
+            $validationV4 = new ValidationV4($token);
+            $arrayContent = $validationV4->getValidAddress($address, $parameter);
+        } catch (Exception $exception) {
+            $msg = "Exception: " . $exception->getMessage() . PHP_EOL;
             fwrite(STDERR, $msg);
             $this->fail("Exception thrown during validate call: " . $msg);
         }
@@ -57,13 +57,14 @@ class BasicRemoteTest extends AbstractTestCase {
             $response = ValidationV4Mapper::fromArray($arrayContent);
             $this->assertNotNull($response);
             $this->assertInstanceOf(ValidationV4Response::class, $response);
-        } catch (Throwable $e) {
-            fwrite(STDERR, "Exception caught: " . $e::class . "\n");
-            fwrite(STDERR, $e->getMessage() . "\n");
-            fwrite(STDERR, $e->getTraceAsString() . "\n");
+        } catch (Throwable $throwable) {
+            fwrite(STDERR, "Exception caught: " . $throwable::class . "\n");
+            fwrite(STDERR, $throwable->getMessage() . "\n");
+            fwrite(STDERR, $throwable->getTraceAsString() . "\n");
 
-            $this->fail("Exception thrown during fromArray(): " . $e->getMessage());
+            $this->fail("Exception thrown during fromArray(): " . $throwable->getMessage());
         }
+
         $data = $response->getData();
         $standard = $data->getAddress()->getStandard();
         $smart = $data->getAddress()->getSmart();

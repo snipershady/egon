@@ -20,11 +20,11 @@
 namespace Egon\Enum;
 
 /**
- * Description of OutputDescriptionEnum
+ * Description of OutputDescriptionEnum.
  *
  * @author Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
  */
-enum OutputDescriptionEnum: string {
-
+enum OutputDescriptionEnum: string
+{
     case LATINIZED_WITHOUT_ACCENTS = 'LAT';
 }

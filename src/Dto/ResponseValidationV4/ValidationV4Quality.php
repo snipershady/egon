@@ -19,16 +19,19 @@
 
 namespace Egon\Dto\ResponseValidationV4;
 
-final class ValidationV4Quality {
+final class ValidationV4Quality
+{
+    private ?ValidationV4QualityAddress $validationV4QualityAddress = null;
 
-    private ?ValidationV4QualityAddress $address = null;
-
-    public function getAddress(): ?ValidationV4QualityAddress {
-        return $this->address;
+    public function getAddress(): ?ValidationV4QualityAddress
+    {
+        return $this->validationV4QualityAddress;
     }
 
-    public function setAddress(?ValidationV4QualityAddress $address): self {
-        $this->address = $address;
+    public function setAddress(?ValidationV4QualityAddress $validationV4QualityAddress): self
+    {
+        $this->validationV4QualityAddress = $validationV4QualityAddress;
+
         return $this;
     }
 }

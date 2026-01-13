@@ -20,12 +20,12 @@
 namespace Egon\Enum;
 
 /**
- * Description of OutputGeoCodingEnum
+ * Description of OutputGeoCodingEnum.
  *
  * @author Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
  */
-enum OutputGeoCodingEnum: string {
-
+enum OutputGeoCodingEnum: string
+{
     case GEOCODING_ON = 'S';
     case GEOCODING_OFF = 'N';
 }

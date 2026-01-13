@@ -19,40 +19,42 @@
 
 namespace Egon\Dto\ResponseValidationV4;
 
-final class ValidationV4Mapper {
-
-    public static function fromArray(array $data): ValidationV4Response {
-        $response = new ValidationV4Response();
+final class ValidationV4Mapper
+{
+    public static function fromArray(array $data): ValidationV4Response
+    {
+        $validationV4Response = new ValidationV4Response();
 
         if (isset($data['data'])) {
-            $response->setData(self::mapData($data['data']));
+            $validationV4Response->setData(self::mapData($data['data']));
         }
 
         if (isset($data['quality'])) {
-            $response->setQuality(self::mapQuality($data['quality']));
+            $validationV4Response->setQuality(self::mapQuality($data['quality']));
         }
 
         if (isset($data['system'])) {
-            $response->setSystem(self::mapSystem($data['system']));
+            $validationV4Response->setSystem(self::mapSystem($data['system']));
         }
 
-        return $response;
+        return $validationV4Response;
     }
 
-    private static function mapData(array $data): ?ValidationV4Data {
-        $obj = new ValidationV4Data();
+    private static function mapData(array $data): ?ValidationV4Data
+    {
+        $validationV4Data = new ValidationV4Data();
 
         if (empty($data['address'])) {
             return null;
         }
 
-        $address = new ValidationV4Address();
+        $validationV4Address = new ValidationV4Address();
 
         if (isset($data['address']['standard'])) {
-            $std = new ValidationV4Standard();
+            $validationV4Standard = new ValidationV4Standard();
             foreach ($data['address']['standard'] as $k => $v) {
                 $camelKey = self::snakeToCamel($k);
-                if ($k === 'adm_code') {
+                if ('adm_code' === $k) {
                     $admCodes = [];
                     foreach ($v as $adm) {
                         $admObj = new ValidationV4AdmCode();
@@ -61,66 +63,72 @@ final class ValidationV4Mapper {
                         $admObj->setValue($adm['value']);
                         $admCodes[] = $admObj;
                     }
-                    $std->setAdmCode($admCodes);
-                } elseif ($k === 'egon_code') {
+
+                    $validationV4Standard->setAdmCode($admCodes);
+                } elseif ('egon_code' === $k) {
                     $egon = new ValidationV4EgonCode();
-                    $egon->setCity($v['city'] ?? "");
-                    $egon->setStreet($v['street'] ?? "");
-                    $egon->setHn($v['hn'] ?? "");
-                    $std->setEgonCode($egon);
+                    $egon->setCity($v['city'] ?? '');
+                    $egon->setStreet($v['street'] ?? '');
+                    $egon->setHn($v['hn'] ?? '');
+                    $validationV4Standard->setEgonCode($egon);
                 } else {
-                    $method = 'set' . ucfirst($camelKey);
-                    if (method_exists($std, $method)) {
-                        $std->$method($v);
+                    $method = 'set'.ucfirst($camelKey);
+                    if (method_exists($validationV4Standard, $method)) {
+                        $validationV4Standard->$method($v);
                     }
                 }
             }
-            $address->setStandard($std);
+
+            $validationV4Address->setStandard($validationV4Standard);
         }
 
         if (isset($data['address']['smart'])) {
-            $smart = new ValidationV4Smart();
+            $validationV4Smart = new ValidationV4Smart();
             foreach ($data['address']['smart'] as $k => $v) {
-                $method = 'set' . ucfirst(self::snakeToCamel($k));
-                if (method_exists($smart, $method)) {
-                    $smart->$method($v);
+                $method = 'set'.ucfirst(self::snakeToCamel($k));
+                if (method_exists($validationV4Smart, $method)) {
+                    $validationV4Smart->$method($v);
                 }
             }
-            $address->setSmart($smart);
+
+            $validationV4Address->setSmart($validationV4Smart);
         }
 
-        $obj->setAddress($address);
+        $validationV4Data->setAddress($validationV4Address);
 
         if (isset($data['geo'])) {
-            $geo = new ValidationV4Geo();
+            $validationV4Geo = new ValidationV4Geo();
             foreach ($data['geo'] as $k => $v) {
-                $method = 'set' . ucfirst(self::snakeToCamel($k));
-                if (method_exists($geo, $method)) {
-                    $geo->$method($v);
+                $method = 'set'.ucfirst(self::snakeToCamel($k));
+                if (method_exists($validationV4Geo, $method)) {
+                    $validationV4Geo->$method($v);
                 }
             }
-            $obj->setGeo($geo);
+
+            $validationV4Data->setGeo($validationV4Geo);
         }
 
         if (isset($data['postal'])) {
-            $postal = new ValidationV4Postal();
+            $validationV4Postal = new ValidationV4Postal();
             foreach ($data['postal'] as $k => $v) {
-                $method = 'set' . ucfirst(self::snakeToCamel($k));
-                if (method_exists($postal, $method)) {
-                    $postal->$method($v);
+                $method = 'set'.ucfirst(self::snakeToCamel($k));
+                if (method_exists($validationV4Postal, $method)) {
+                    $validationV4Postal->$method($v);
                 }
             }
-            $obj->setPostal($postal);
+
+            $validationV4Data->setPostal($validationV4Postal);
         }
 
-        return $obj;
+        return $validationV4Data;
     }
 
-    private static function mapQuality(array $quality): ValidationV4Quality {
-        $q = new ValidationV4Quality();
+    private static function mapQuality(array $quality): ValidationV4Quality
+    {
+        $validationV4Quality = new ValidationV4Quality();
 
         if (isset($quality['address'])) {
-            $qa = new ValidationV4QualityAddress();
+            $validationV4QualityAddress = new ValidationV4QualityAddress();
 
             foreach (['locality', 'street', 'hn'] as $field) {
                 if (isset($quality['address'][$field])) {
@@ -128,26 +136,30 @@ final class ValidationV4Mapper {
                     $f->setFlag($quality['address'][$field]['flag']);
                     $f->setCode($quality['address'][$field]['code']);
                     $f->setDescription($quality['address'][$field]['description']);
-                    $method = 'set' . ucfirst($field);
-                    $qa->$method($f);
+                    $method = 'set'.ucfirst($field);
+                    $validationV4QualityAddress->$method($f);
                 }
             }
 
-            $q->setAddress($qa);
+            $validationV4Quality->setAddress($validationV4QualityAddress);
         }
 
-        return $q;
+        return $validationV4Quality;
     }
 
-    private static function mapSystem(array $system): ValidationV4System {
-        $s = new ValidationV4System();
-        $s->setRetCode($system['ret_code']);
-        $s->setDesRetCode($system['des_ret_code']);
-        return $s;
+    private static function mapSystem(array $system): ValidationV4System
+    {
+        $validationV4System = new ValidationV4System();
+        $validationV4System->setRetCode($system['ret_code']);
+        $validationV4System->setDesRetCode($system['des_ret_code']);
+
+        return $validationV4System;
     }
 
-    private static function snakeToCamel(string $string): string {
+    private static function snakeToCamel(string $string): string
+    {
         $parts = explode('_', $string);
-        return array_shift($parts) . implode('', array_map('ucfirst', $parts));
+
+        return array_shift($parts).implode('', array_map(ucfirst(...), $parts));
     }
 }

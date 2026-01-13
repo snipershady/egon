@@ -19,8 +19,8 @@
 
 namespace Egon\Dto\ResponseValidationV4;
 
-final class ValidationV4Standard {
-
+final class ValidationV4Standard
+{
     private ?string $iso3 = null;
     private ?string $country = null;
     private ?string $region = null;
@@ -37,153 +37,202 @@ final class ValidationV4Standard {
     private ?string $postalTown1 = null;
 
     /**
-     * <p>array of ValidationV4AdmCode</p>
+     * <p>array of ValidationV4AdmCode</p>.
+     *
      * @var array<ValidationV4AdmCode>
      */
     private array $admCode = [];
-    private ?ValidationV4EgonCode $egonCode = null;
+    private ?ValidationV4EgonCode $validationV4EgonCode = null;
 
-    public function getIso3(): ?string {
+    public function getIso3(): ?string
+    {
         return $this->iso3;
     }
 
-    public function getCountry(): ?string {
+    public function getCountry(): ?string
+    {
         return $this->country;
     }
 
-    public function getRegion(): ?string {
+    public function getRegion(): ?string
+    {
         return $this->region;
     }
 
-    public function getProvince(): ?string {
+    public function getProvince(): ?string
+    {
         return $this->province;
     }
 
-    public function getProvinceCode(): ?string {
+    public function getProvinceCode(): ?string
+    {
         return $this->provinceCode;
     }
 
-    public function getCity(): ?string {
+    public function getCity(): ?string
+    {
         return $this->city;
     }
 
-    public function getZipcode(): ?string {
+    public function getZipcode(): ?string
+    {
         return $this->zipcode;
     }
 
-    public function getStreetType(): ?string {
+    public function getStreetType(): ?string
+    {
         return $this->streetType;
     }
 
-    public function getStreetName(): ?string {
+    public function getStreetName(): ?string
+    {
         return $this->streetName;
     }
 
-    public function getStreet(): ?string {
+    public function getStreet(): ?string
+    {
         return $this->street;
     }
 
-    public function getAddress(): ?string {
+    public function getAddress(): ?string
+    {
         return $this->address;
     }
 
-    public function getFullAddress(): ?string {
+    public function getFullAddress(): ?string
+    {
         return $this->fullAddress;
     }
 
-    public function getHn(): ?string {
+    public function getHn(): ?string
+    {
         return $this->hn;
     }
 
-    public function getPostalTown1(): ?string {
+    public function getPostalTown1(): ?string
+    {
         return $this->postalTown1;
     }
 
-    public function getAdmCode(): array {
+    public function getAdmCode(): array
+    {
         return $this->admCode;
     }
 
-    public function getEgonCode(): ?ValidationV4EgonCode {
-        return $this->egonCode;
+    public function getEgonCode(): ?ValidationV4EgonCode
+    {
+        return $this->validationV4EgonCode;
     }
 
-    public function setIso3(?string $iso3): static {
+    public function setIso3(?string $iso3): static
+    {
         $this->iso3 = $iso3;
+
         return $this;
     }
 
-    public function setCountry(?string $country): static {
+    public function setCountry(?string $country): static
+    {
         $this->country = $country;
+
         return $this;
     }
 
-    public function setRegion(?string $region): static {
+    public function setRegion(?string $region): static
+    {
         $this->region = $region;
+
         return $this;
     }
 
-    public function setProvince(?string $province): static {
+    public function setProvince(?string $province): static
+    {
         $this->province = $province;
+
         return $this;
     }
 
-    public function setProvinceCode(?string $provinceCode): static {
+    public function setProvinceCode(?string $provinceCode): static
+    {
         $this->provinceCode = $provinceCode;
+
         return $this;
     }
 
-    public function setCity(?string $city): static {
+    public function setCity(?string $city): static
+    {
         $this->city = $city;
+
         return $this;
     }
 
-    public function setZipcode(?string $zipcode): static {
+    public function setZipcode(?string $zipcode): static
+    {
         $this->zipcode = $zipcode;
+
         return $this;
     }
 
-    public function setStreetType(?string $streetType): static {
+    public function setStreetType(?string $streetType): static
+    {
         $this->streetType = $streetType;
+
         return $this;
     }
 
-    public function setStreetName(?string $streetName): static {
+    public function setStreetName(?string $streetName): static
+    {
         $this->streetName = $streetName;
+
         return $this;
     }
 
-    public function setStreet(?string $street): static {
+    public function setStreet(?string $street): static
+    {
         $this->street = $street;
+
         return $this;
     }
 
-    public function setAddress(?string $address): static {
+    public function setAddress(?string $address): static
+    {
         $this->address = $address;
+
         return $this;
     }
 
-    public function setFullAddress(?string $fullAddress): static {
+    public function setFullAddress(?string $fullAddress): static
+    {
         $this->fullAddress = $fullAddress;
+
         return $this;
     }
 
-    public function setHn(?string $hn): static {
+    public function setHn(?string $hn): static
+    {
         $this->hn = $hn;
+
         return $this;
     }
 
-    public function setPostalTown1(?string $postalTown1): static {
+    public function setPostalTown1(?string $postalTown1): static
+    {
         $this->postalTown1 = $postalTown1;
+
         return $this;
     }
 
-    public function setAdmCode(array $admCode): static {
+    public function setAdmCode(array $admCode): static
+    {
         $this->admCode = $admCode;
+
         return $this;
     }
 
-    public function setEgonCode(?ValidationV4EgonCode $egonCode): static {
-        $this->egonCode = $egonCode;
+    public function setEgonCode(?ValidationV4EgonCode $validationV4EgonCode): static
+    {
+        $this->validationV4EgonCode = $validationV4EgonCode;
+
         return $this;
     }
 }

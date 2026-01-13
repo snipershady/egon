@@ -19,36 +19,45 @@
 
 namespace Egon\Dto\ResponseValidationV4;
 
-class ValidationV4AdmCode {
-
+class ValidationV4AdmCode
+{
     private string $iso3;
     private string $type;
     private string $value;
 
-    public function getIso3(): string {
+    public function getIso3(): string
+    {
         return $this->iso3;
     }
 
-    public function getType(): string {
+    public function getType(): string
+    {
         return $this->type;
     }
 
-    public function getValue(): string {
+    public function getValue(): string
+    {
         return $this->value;
     }
 
-    public function setIso3(string $iso3): static {
+    public function setIso3(string $iso3): static
+    {
         $this->iso3 = $iso3;
+
         return $this;
     }
 
-    public function setType(string $type): static {
+    public function setType(string $type): static
+    {
         $this->type = $type;
+
         return $this;
     }
 
-    public function setValue(string $value): static {
+    public function setValue(string $value): static
+    {
         $this->value = $value;
+
         return $this;
     }
 }

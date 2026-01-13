@@ -23,55 +23,44 @@ use Egon\Exception\CurlException;
 use Egon\Exception\EgonException;
 
 /**
- * Description of Balance
+ * Description of Balance.
  *
  * @author Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
  */
-final readonly class Balance {
-
-    /**
-     * 
-     * @param string $token
-     * @param string $url
-     */
+final readonly class Balance
+{
     public function __construct(
-            private string $token,
-            private string $url = "https://api.egon.com/account/balance"
+        private string $token,
+        private string $url = 'https://api.egon.com/account/balance',
     ) {
-        
     }
 
     /**
-     * 
-     * @param string $token
-     * @return float
      * @throws CurlException
      * @throws EgonException
      */
-    public function getBalance(): float {
+    public function getBalance(): float
+    {
         $ch = curl_init($this->url);
         curl_setopt_array($ch, [
             CURLOPT_RETURNTRANSFER => true, // Per ottenere la risposta come stringa
             CURLOPT_HTTPHEADER => [
-                'Authorization: Bearer ' . $this->token,
+                'Authorization: Bearer '.$this->token,
             ],
         ]);
 
         $response = curl_exec($ch);
 
-        if (curl_errno($ch) !== 0) {
-            $msg = 'cURL Error: ' . curl_error($ch);
-            curl_close($ch);
+        if (0 !== curl_errno($ch)) {
+            $msg = 'cURL Error: '.curl_error($ch);
             throw new CurlException($msg);
         }
-        
-        curl_close($ch);
 
         $result = json_decode($response, true, 512, JSON_THROW_ON_ERROR);
-        if (empty($result["balance"])) {
-            throw new EgonException("Balance call, failed");
+        if (empty($result['balance'])) {
+            throw new EgonException('Balance call, failed');
         }
 
-        return (float) $result["balance"];
+        return (float) $result['balance'];
     }
 }

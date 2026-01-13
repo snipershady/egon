@@ -20,12 +20,12 @@
 namespace Egon\Enum;
 
 /**
- * Description of OutputLanguageEnum
+ * Description of OutputLanguageEnum.
  *
  * @author Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
  */
-enum OutputLanguageEnum: string {
-
+enum OutputLanguageEnum: string
+{
     case NATIVE_OUTPUT_LANGUAGE = 'NAT';
     case TRANSLITERED_OUTPUT_LANGUAGE = 'TRA';
     case INTERNATIONAL_ENGLISH_OUTPUT_LANGUAGE = 'INT';

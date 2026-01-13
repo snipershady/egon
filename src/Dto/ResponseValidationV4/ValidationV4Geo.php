@@ -19,36 +19,45 @@
 
 namespace Egon\Dto\ResponseValidationV4;
 
-class ValidationV4Geo {
-
+class ValidationV4Geo
+{
     private ?string $latLong = null;
     private ?string $geoLevel = null;
     private ?string $censusCode = null;
 
-    public function getLatLong(): ?string {
+    public function getLatLong(): ?string
+    {
         return $this->latLong;
     }
 
-    public function getGeoLevel(): ?string {
+    public function getGeoLevel(): ?string
+    {
         return $this->geoLevel;
     }
 
-    public function getCensusCode(): ?string {
+    public function getCensusCode(): ?string
+    {
         return $this->censusCode;
     }
 
-    public function setLatLong(?string $latLong): static {
+    public function setLatLong(?string $latLong): static
+    {
         $this->latLong = $latLong;
+
         return $this;
     }
 
-    public function setGeoLevel(?string $geoLevel): static {
+    public function setGeoLevel(?string $geoLevel): static
+    {
         $this->geoLevel = $geoLevel;
+
         return $this;
     }
 
-    public function setCensusCode(?string $censusCode): static {
+    public function setCensusCode(?string $censusCode): static
+    {
         $this->censusCode = $censusCode;
+
         return $this;
     }
 }

@@ -19,26 +19,32 @@
 
 namespace Egon\Dto\ResponseValidationV4;
 
-final class ValidationV4Address {
+final class ValidationV4Address
+{
+    private ?ValidationV4Standard $validationV4Standard = null;
+    private ?ValidationV4Smart $validationV4Smart = null;
 
-    private ?ValidationV4Standard $standard = null;
-    private ?ValidationV4Smart $smart = null;
-
-    public function getStandard(): ?ValidationV4Standard {
-        return $this->standard;
+    public function getStandard(): ?ValidationV4Standard
+    {
+        return $this->validationV4Standard;
     }
 
-    public function getSmart(): ?ValidationV4Smart {
-        return $this->smart;
+    public function getSmart(): ?ValidationV4Smart
+    {
+        return $this->validationV4Smart;
     }
 
-    public function setStandard(?ValidationV4Standard $standard): static {
-        $this->standard = $standard;
+    public function setStandard(?ValidationV4Standard $validationV4Standard): static
+    {
+        $this->validationV4Standard = $validationV4Standard;
+
         return $this;
     }
 
-    public function setSmart(?ValidationV4Smart $smart): static {
-        $this->smart = $smart;
+    public function setSmart(?ValidationV4Smart $validationV4Smart): static
+    {
+        $this->validationV4Smart = $validationV4Smart;
+
         return $this;
     }
 }

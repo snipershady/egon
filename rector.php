@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Rector\CodingStyle\Rector\ClassLike\NewlineBetweenClassLikeStmtsRector;
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessParamTagRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessReturnTagRector;
@@ -14,37 +15,30 @@ return RectorConfig::configure()
                     __DIR__ . '/tests'
                 ])
                 ->withSkip([
-                    //InlineClassRoutePrefixRector::class,
-                    //NewMethodCallWithoutParenthesesRector::class,
-                    //UnusedForeachValueToArrayKeysRector::class,
-                    //RemoveUnusedForeachKeyRector::class,
                     RemoveUselessParamTagRector::class,
-                    RemoveUselessReturnTagRector::class
-                    //SimplifyUselessVariableRector::class
+                    RemoveUselessReturnTagRector::class,
+                    NewlineBetweenClassLikeStmtsRector::class
                 ])
                 ->withPreparedSets(
-                //deadCode: true,
-                //codeQuality: true,
-                //codingStyle: true,
-                //naming: true,
-                //privatization: true,
-                //typeDeclarations: true,
-                //rectorPreset: true
+                        //deadCode: true,
+                        //codeQuality: true,
+                        codingStyle: true,
+                        naming: true,
+                        privatization: true,
+                        //typeDeclarations: true,
+                        //rectorPreset: true
                 )
-                ->withPhpSets(php84: true)
-                ->withPhpVersion(PhpVersion::PHP_84)
+                ->withPhpSets(php85: true)
+                ->withPhpVersion(PhpVersion::PHP_85)
                 ->withAttributesSets(symfony: true, doctrine: true)
                 ->withComposerBased(twig: true, doctrine: true, phpunit: true, symfony: true)
                 ->withSets(
                         [
-                            LevelSetList::UP_TO_PHP_84
+                            LevelSetList::UP_TO_PHP_85
                         ]
                 )
                 ->withRules(
                         [
-                        //ExplicitNullableParamTypeRector::class,
-                        //AddOverrideAttributeToOverriddenMethodsRector::class,
-                        //ReturnTypeFromStrictNativeCallRector::class
                         ]
                 )
                 ->withTypeCoverageLevel(50)

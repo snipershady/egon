@@ -25,40 +25,35 @@ use Egon\Enum\OutputFormatEnum;
 use Egon\Enum\OutputGeoCodingEnum;
 use Egon\Enum\OutputLanguageEnum;
 
-final readonly class Parameter {
-
-    /**
-     * 
-     * @param CountryCodeAlpha3Enum $countryCode
-     * @param OutputGeoCodingEnum $outputGeoCoding
-     * @param OutputFormatEnum|null $outputFormat
-     * @param OutputLanguageEnum|null $outputLanguage
-     * @param OutputDescriptionEnum|null $outputDescription
-     */
+final readonly class Parameter
+{
     public function __construct(
-            private CountryCodeAlpha3Enum $countryCode,
-            private OutputGeoCodingEnum $outputGeoCoding = OutputGeoCodingEnum::GEOCODING_OFF,
-            private ?OutputFormatEnum $outputFormat = null,
-            private ?OutputLanguageEnum $outputLanguage = null,
-            private ?OutputDescriptionEnum $outputDescription = null
+        private CountryCodeAlpha3Enum $countryCodeAlpha3Enum,
+        private OutputGeoCodingEnum $outputGeoCodingEnum = OutputGeoCodingEnum::GEOCODING_OFF,
+        private ?OutputFormatEnum $outputFormatEnum = null,
+        private ?OutputLanguageEnum $outputLanguageEnum = null,
+        private ?OutputDescriptionEnum $outputDescriptionEnum = null,
     ) {
-        
     }
 
-    public function toArray(): array {
+    public function toArray(): array
+    {
         $fields = [
-            "iso3" => $this->countryCode->value,
-            "geo" => $this->outputGeoCoding->value
+            'iso3' => $this->countryCodeAlpha3Enum->value,
+            'geo' => $this->outputGeoCodingEnum->value,
         ];
-        if ($this->outputFormat !== null) {
-            $fields["fmtout"] = $this->outputFormat->value;
+        if (null !== $this->outputFormatEnum) {
+            $fields['fmtout'] = $this->outputFormatEnum->value;
         }
-        if ($this->outputLanguage !== null) {
-            $fields["lngout"] = $this->outputLanguage->value;
+
+        if (null !== $this->outputLanguageEnum) {
+            $fields['lngout'] = $this->outputLanguageEnum->value;
         }
-        if ($this->outputDescription !== null) {
-            $fields["tpxout"] = $this->outputDescription->value;
+
+        if (null !== $this->outputDescriptionEnum) {
+            $fields['tpxout'] = $this->outputDescriptionEnum->value;
         }
+
         return $fields;
     }
 }

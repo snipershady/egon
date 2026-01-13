@@ -20,12 +20,12 @@
 namespace Egon\Enum;
 
 /**
- * Description of CountryCodeAlpha3Enum
+ * Description of CountryCodeAlpha3Enum.
  *
  * @author Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
  */
-enum CountryCodeAlpha3Enum: string {
-
+enum CountryCodeAlpha3Enum: string
+{
     case AFGHANISTAN = 'AFG';
     case ALBANIA = 'ALB';
     case ALGERIA = 'DZA';

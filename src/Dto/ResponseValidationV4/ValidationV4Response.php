@@ -19,36 +19,45 @@
 
 namespace Egon\Dto\ResponseValidationV4;
 
-class ValidationV4Response {
+class ValidationV4Response
+{
+    private ?ValidationV4Data $validationV4Data = null;
+    private ?ValidationV4Quality $validationV4Quality = null;
+    private ?ValidationV4System $validationV4System = null;
 
-    private ?ValidationV4Data $data = null;
-    private ?ValidationV4Quality $quality = null;
-    private ?ValidationV4System $system = null;
-
-    public function getData(): ?ValidationV4Data {
-        return $this->data;
+    public function getData(): ?ValidationV4Data
+    {
+        return $this->validationV4Data;
     }
 
-    public function getQuality(): ?ValidationV4Quality {
-        return $this->quality;
+    public function getQuality(): ?ValidationV4Quality
+    {
+        return $this->validationV4Quality;
     }
 
-    public function getSystem(): ?ValidationV4System {
-        return $this->system;
+    public function getSystem(): ?ValidationV4System
+    {
+        return $this->validationV4System;
     }
 
-    public function setData(?ValidationV4Data $data): static {
-        $this->data = $data;
+    public function setData(?ValidationV4Data $validationV4Data): static
+    {
+        $this->validationV4Data = $validationV4Data;
+
         return $this;
     }
 
-    public function setQuality(?ValidationV4Quality $quality): static {
-        $this->quality = $quality;
+    public function setQuality(?ValidationV4Quality $validationV4Quality): static
+    {
+        $this->validationV4Quality = $validationV4Quality;
+
         return $this;
     }
 
-    public function setSystem(?ValidationV4System $system): static {
-        $this->system = $system;
+    public function setSystem(?ValidationV4System $validationV4System): static
+    {
+        $this->validationV4System = $validationV4System;
+
         return $this;
     }
 }

@@ -36,20 +36,20 @@ class BasicTest extends AbstractTestCase {
     public function testPersistedSampleResponse(): void {
         try {
             $arrayContent = $this->loadJsonFromFile(__DIR__ . '/sample_response.json');
-        } catch (RuntimeException $e) {
-            echo "Errore: " . $e->getMessage();
+        } catch (RuntimeException $runtimeException) {
+            echo "Errore: " . $runtimeException->getMessage();
         }
 
         try {
             $response = ValidationV4Mapper::fromArray($arrayContent);
             $this->assertNotNull($response);
             $this->assertInstanceOf(ValidationV4Response::class, $response);
-        } catch (Throwable $e) {
-            fwrite(STDERR, "Exception caught: " . $e::class . "\n");
-            fwrite(STDERR, $e->getMessage() . "\n");
-            fwrite(STDERR, $e->getTraceAsString() . "\n");
+        } catch (Throwable $throwable) {
+            fwrite(STDERR, "Exception caught: " . $throwable::class . "\n");
+            fwrite(STDERR, $throwable->getMessage() . "\n");
+            fwrite(STDERR, $throwable->getTraceAsString() . "\n");
 
-            $this->fail("Exception thrown during fromArray(): " . $e->getMessage());
+            $this->fail("Exception thrown during fromArray(): " . $throwable->getMessage());
         }
 
         $data = $response->getData();
@@ -163,14 +163,15 @@ class BasicTest extends AbstractTestCase {
      */
     private function loadJsonFromFile(string $filePath): ?array {
         if (!file_exists($filePath)) {
-            throw new RuntimeException("File not found: $filePath");
+            throw new RuntimeException('File not found: ' . $filePath);
         }
 
         $content = file_get_contents($filePath);
 
         if ($content === false) {
-            throw new RuntimeException("Unable to read file: $filePath");
+            throw new RuntimeException('Unable to read file: ' . $filePath);
         }
+
         return json_decode($content, true, 512, JSON_THROW_ON_ERROR);
     }
 }

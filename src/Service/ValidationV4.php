@@ -27,50 +27,42 @@ use Egon\Exception\CurlException;
 use Egon\Exception\EgonException;
 
 /**
- * Description of ValidationV4
+ * Description of ValidationV4.
  *
  * @author Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
  */
-final readonly class ValidationV4 {
-
+final readonly class ValidationV4
+{
     public function __construct(
-            private string $token,
-            private string $url = "https://api.egon.com/v4/validation/address"
+        private string $token,
+        private string $url = 'https://api.egon.com/v4/validation/address',
     ) {
-        
     }
 
     /**
-     * 
-     * @param Address $address
-     * @param Parameter $parameter
      * @throws CurlException
      * @throws EgonException
-     * @return array
      */
     public function getValidAddress(
-            Address $address,
-            Parameter $parameter
+        Address $address,
+        Parameter $parameter,
     ): array {
         $arrayContent = $this->validate($address, $parameter);
 
         if (empty($arrayContent)) {
             return [];
         }
+
         return $arrayContent;
     }
 
     /**
-     * 
-     * @param Address $address
-     * @param Parameter $parameter
-     * @return ValidationV4Response
      * @throws EgonException
      * @throws CurlException
      */
     public function getValidAddressMapped(
-            Address $address,
-            Parameter $parameter
+        Address $address,
+        Parameter $parameter,
     ): ValidationV4Response {
         $arrayContent = $this->validate($address, $parameter);
 
@@ -78,23 +70,19 @@ final readonly class ValidationV4 {
     }
 
     /**
-     * 
-     * @param Address $address
-     * @param Parameter $parameter
-     * @return array
      * @throws CurlException
      * @throws EgonException
      */
     private function validate(
-            Address $address,
-            Parameter $parameter
+        Address $address,
+        Parameter $parameter,
     ): array {
         // Payload JSON
         $payload = [
             'par' => $parameter->toArray(),
             'data' => [
                 'address' => $address->toArray(),
-            ]
+            ],
         ];
 
         // init cURL Session
@@ -105,7 +93,7 @@ final readonly class ValidationV4 {
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POST => true,
             CURLOPT_HTTPHEADER => [
-                'Authorization: Bearer ' . $this->token,
+                'Authorization: Bearer '.$this->token,
                 'Content-Type: application/json',
                 'Accept: application/json',
             ],
@@ -116,19 +104,15 @@ final readonly class ValidationV4 {
         $response = curl_exec($ch);
 
         // Error handler
-        if (curl_errno($ch) !== 0) {
-            $msg = 'cURL Error: ' . curl_error($ch);
-            curl_close($ch);
+        if (0 !== curl_errno($ch)) {
+            $msg = 'cURL Error: '.curl_error($ch);
             throw new CurlException($msg);
         }
 
-        // Close curl session
-        curl_close($ch);
-
         $result = json_decode($response, true, 512, JSON_THROW_ON_ERROR);
 
-        if (!empty($result["error"])) {
-            throw new EgonException($result["error"]["message"], (int) $result["error"]["code"]);
+        if (!empty($result['error'])) {
+            throw new EgonException($result['error']['message'], (int) $result['error']['code']);
         }
 
         return $result;
