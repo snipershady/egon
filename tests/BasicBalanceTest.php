@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * Copyright (C) 2022 Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
  *
@@ -22,19 +24,21 @@ namespace Egon\Tests;
 use Egon\Service\Balance;
 
 /**
- * Description of BasicBalanceTest
+ * Description of BasicBalanceTest.
  *
  * @author Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
- * 
- * @example ./vendor/bin/phpunit tests/BasicBalanceTest.php 
+ *
+ * @example ./vendor/bin/phpunit tests/BasicBalanceTest.php
+ *
+ * @internal
  */
-class BasicBalanceTest extends AbstractTestCase {
-
-    public function testWalletBalance(): void {
-        $token = "b4fe924796db0794d0adf552b0986ab55b246364baa7d8187fe2ccbd700cd17a";
-        $balance = new Balance($token);
+final class BasicBalanceTest extends AbstractTestCase
+{
+    public function testWalletBalance(): void
+    {
+        $balance = new Balance(self::getApiToken());
         $res = $balance->getBalance();
 
-        $this->assertIsFloat($res);
+        self::assertIsFloat($res);
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * Copyright (C) 2022 Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
  *
@@ -21,9 +23,9 @@ namespace Egon\Dto\ResponseValidationV4;
 
 class ValidationV4QualityField
 {
-    private ?string $flag = null;
-    private ?string $code = null;
-    private ?string $description = null;
+    private string $flag = '';
+    private string $code = '';
+    private string $description = '';
 
     public function getFlag(): string
     {

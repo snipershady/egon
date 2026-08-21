@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * Copyright (C) 2022 Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
  *
@@ -36,10 +38,11 @@ final readonly class ValidationV4
     public function __construct(
         private string $token,
         private string $url = 'https://api.egon.com/v4/validation/address',
-    ) {
-    }
+    ) {}
 
     /**
+     * @return array<string, mixed>
+     *
      * @throws CurlException
      * @throws EgonException
      */
@@ -47,13 +50,7 @@ final readonly class ValidationV4
         Address $address,
         Parameter $parameter,
     ): array {
-        $arrayContent = $this->validate($address, $parameter);
-
-        if (empty($arrayContent)) {
-            return [];
-        }
-
-        return $arrayContent;
+        return $this->validate($address, $parameter);
     }
 
     /**
@@ -70,6 +67,8 @@ final readonly class ValidationV4
     }
 
     /**
+     * @return array<string, mixed>
+     *
      * @throws CurlException
      * @throws EgonException
      */
@@ -85,6 +84,12 @@ final readonly class ValidationV4
             ],
         ];
 
+        $encodedPayload = json_encode($payload);
+
+        if (false === $encodedPayload) {
+            throw new EgonException('Unable to encode request payload');
+        }
+
         // init cURL Session
         $ch = curl_init($this->url);
 
@@ -97,7 +102,7 @@ final readonly class ValidationV4
                 'Content-Type: application/json',
                 'Accept: application/json',
             ],
-            CURLOPT_POSTFIELDS => json_encode($payload),
+            CURLOPT_POSTFIELDS => $encodedPayload,
         ]);
 
         // Curl request
@@ -106,13 +111,28 @@ final readonly class ValidationV4
         // Error handler
         if (0 !== curl_errno($ch)) {
             $msg = 'cURL Error: '.curl_error($ch);
+
             throw new CurlException($msg);
+        }
+
+        if (!\is_string($response)) {
+            throw new CurlException('Empty or invalid response body');
         }
 
         $result = json_decode($response, true, 512, JSON_THROW_ON_ERROR);
 
-        if (!empty($result['error'])) {
-            throw new EgonException($result['error']['message'], (int) $result['error']['code']);
+        if (!\is_array($result)) {
+            throw new EgonException('Unexpected response format');
+        }
+
+        if (!empty($result['error']) && \is_array($result['error'])) {
+            $message = $result['error']['message'] ?? '';
+            $code = $result['error']['code'] ?? 0;
+
+            throw new EgonException(
+                \is_scalar($message) ? (string) $message : '',
+                \is_scalar($code) ? (int) $code : 0,
+            );
         }
 
         return $result;

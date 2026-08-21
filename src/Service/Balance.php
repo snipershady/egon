@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * Copyright (C) 2022 Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
  *
@@ -32,8 +34,7 @@ final readonly class Balance
     public function __construct(
         private string $token,
         private string $url = 'https://api.egon.com/account/balance',
-    ) {
-    }
+    ) {}
 
     /**
      * @throws CurlException
@@ -53,14 +54,21 @@ final readonly class Balance
 
         if (0 !== curl_errno($ch)) {
             $msg = 'cURL Error: '.curl_error($ch);
+
             throw new CurlException($msg);
         }
 
+        if (!\is_string($response)) {
+            throw new CurlException('Empty or invalid response body');
+        }
+
         $result = json_decode($response, true, 512, JSON_THROW_ON_ERROR);
-        if (empty($result['balance'])) {
+        $balance = \is_array($result) ? ($result['balance'] ?? null) : null;
+
+        if (empty($balance) || !\is_scalar($balance)) {
             throw new EgonException('Balance call, failed');
         }
 
-        return (float) $result['balance'];
+        return (float) $balance;
     }
 }

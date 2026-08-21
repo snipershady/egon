@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * Copyright (C) 2022 Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
  *
@@ -21,35 +23,36 @@ namespace Egon\Tests;
 
 use Egon\Dto\ResponseValidationV4\ValidationV4Mapper;
 use Egon\Dto\ResponseValidationV4\ValidationV4Response;
-use RuntimeException;
-use Throwable;
 
 /**
- * Description of AbstractTestCase
+ * Description of AbstractTestCase.
  *
  * @author Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
- * 
- * @example ./vendor/bin/phpunit tests/BasicTest.php 
+ *
+ * @example ./vendor/bin/phpunit tests/BasicTest.php
+ *
+ * @internal
  */
-class BasicTest extends AbstractTestCase {
-
-    public function testPersistedSampleResponse(): void {
+final class BasicTest extends AbstractTestCase
+{
+    public function testPersistedSampleResponse(): void
+    {
         try {
-            $arrayContent = $this->loadJsonFromFile(__DIR__ . '/sample_response.json');
-        } catch (RuntimeException $runtimeException) {
-            echo "Errore: " . $runtimeException->getMessage();
+            $arrayContent = $this->loadJsonFromFile(__DIR__.'/sample_response.json');
+        } catch (\RuntimeException $runtimeException) {
+            echo 'Errore: '.$runtimeException->getMessage();
         }
 
         try {
             $response = ValidationV4Mapper::fromArray($arrayContent);
-            $this->assertNotNull($response);
-            $this->assertInstanceOf(ValidationV4Response::class, $response);
-        } catch (Throwable $throwable) {
-            fwrite(STDERR, "Exception caught: " . $throwable::class . "\n");
-            fwrite(STDERR, $throwable->getMessage() . "\n");
-            fwrite(STDERR, $throwable->getTraceAsString() . "\n");
+            self::assertNotNull($response);
+            self::assertInstanceOf(ValidationV4Response::class, $response);
+        } catch (\Throwable $throwable) {
+            fwrite(STDERR, 'Exception caught: '.$throwable::class."\n");
+            fwrite(STDERR, $throwable->getMessage()."\n");
+            fwrite(STDERR, $throwable->getTraceAsString()."\n");
 
-            $this->fail("Exception thrown during fromArray(): " . $throwable->getMessage());
+            self::fail('Exception thrown during fromArray(): '.$throwable->getMessage());
         }
 
         $data = $response->getData();
@@ -61,115 +64,113 @@ class BasicTest extends AbstractTestCase {
         $system = $response->getSystem();
 
         // Standard address assertions
-        $this->assertEquals('ITA', $standard->getIso3());
-        $this->assertEquals('Italia', $standard->getCountry());
-        $this->assertEquals('Veneto', $standard->getRegion());
-        $this->assertEquals('Verona', $standard->getProvince());
-        $this->assertEquals('VR', $standard->getProvinceCode());
-        $this->assertEquals('Verona', $standard->getCity());
-        $this->assertEquals('37135', $standard->getZipcode());
-        $this->assertEquals('Via', $standard->getStreetType());
-        $this->assertEquals('Antonio Pacinotti', $standard->getStreetName());
-        $this->assertEquals('Via Antonio Pacinotti', $standard->getStreet());
-        $this->assertEquals('Via Antonio Pacinotti,4/B', $standard->getAddress());
-        $this->assertEquals('Via Antonio Pacinotti,4/B, Verona, VR, Veneto, 37135, Italia', $standard->getFullAddress());
-        $this->assertEquals('4/B', $standard->getHn());
-        $this->assertEquals('VERONA', $standard->getPostalTown1());
+        self::assertSame('ITA', $standard->getIso3());
+        self::assertSame('Italia', $standard->getCountry());
+        self::assertSame('Veneto', $standard->getRegion());
+        self::assertSame('Verona', $standard->getProvince());
+        self::assertSame('VR', $standard->getProvinceCode());
+        self::assertSame('Verona', $standard->getCity());
+        self::assertEquals('37135', $standard->getZipcode());
+        self::assertSame('Via', $standard->getStreetType());
+        self::assertSame('Antonio Pacinotti', $standard->getStreetName());
+        self::assertSame('Via Antonio Pacinotti', $standard->getStreet());
+        self::assertSame('Via Antonio Pacinotti,4/B', $standard->getAddress());
+        self::assertSame('Via Antonio Pacinotti,4/B, Verona, VR, Veneto, 37135, Italia', $standard->getFullAddress());
+        self::assertSame('4/B', $standard->getHn());
+        self::assertSame('VERONA', $standard->getPostalTown1());
 
         $admCodes = $standard->getAdmCode();
-        $this->assertCount(12, $admCodes);
-        $this->assertEquals('50137', $admCodes[0]->getType());
-        $this->assertEquals('VR', $admCodes[0]->getValue());
+        self::assertCount(12, $admCodes);
+        self::assertEquals('50137', $admCodes[0]->getType());
+        self::assertEquals('VR', $admCodes[0]->getValue());
 
-        $this->assertEquals('30030', $admCodes[1]->getType());
-        $this->assertEquals('11700', $admCodes[1]->getValue());
+        self::assertEquals('30030', $admCodes[1]->getType());
+        self::assertEquals('11700', $admCodes[1]->getValue());
 
-        $this->assertEquals('30000', $admCodes[2]->getType());
-        $this->assertEquals('L781', $admCodes[2]->getValue());
+        self::assertEquals('30000', $admCodes[2]->getType());
+        self::assertEquals('L781', $admCodes[2]->getValue());
 
-        $this->assertEquals('30021', $admCodes[3]->getType());
-        $this->assertEquals('023091', $admCodes[3]->getValue());
+        self::assertEquals('30021', $admCodes[3]->getType());
+        self::assertEquals('023091', $admCodes[3]->getValue());
 
-        $this->assertEquals('30060', $admCodes[4]->getType());
-        $this->assertEquals('086', $admCodes[4]->getValue());
+        self::assertEquals('30060', $admCodes[4]->getType());
+        self::assertEquals('086', $admCodes[4]->getValue());
 
-        $this->assertEquals('30061', $admCodes[5]->getType());
-        $this->assertEquals('660999', $admCodes[5]->getValue());
+        self::assertEquals('30061', $admCodes[5]->getType());
+        self::assertEquals('660999', $admCodes[5]->getValue());
 
-        $this->assertEquals('30050', $admCodes[6]->getType());
-        $this->assertEquals('0777000', $admCodes[6]->getValue());
+        self::assertEquals('30050', $admCodes[6]->getType());
+        self::assertEquals('0777000', $admCodes[6]->getValue());
 
-        $this->assertEquals('30071', $admCodes[7]->getType());
-        $this->assertEquals('IT', $admCodes[7]->getValue());
+        self::assertEquals('30071', $admCodes[7]->getType());
+        self::assertEquals('IT', $admCodes[7]->getValue());
 
-        $this->assertEquals('30070', $admCodes[8]->getType());
-        $this->assertEquals('ITA', $admCodes[8]->getValue());
+        self::assertEquals('30070', $admCodes[8]->getType());
+        self::assertEquals('ITA', $admCodes[8]->getValue());
 
-        $this->assertEquals('30072', $admCodes[9]->getType());
-        $this->assertEquals('380', $admCodes[9]->getValue());
+        self::assertEquals('30072', $admCodes[9]->getType());
+        self::assertEquals('380', $admCodes[9]->getValue());
 
-        $this->assertEquals('30114', $admCodes[10]->getType());
-        $this->assertEquals('ITALIA', $admCodes[10]->getValue());
+        self::assertEquals('30114', $admCodes[10]->getType());
+        self::assertEquals('ITALIA', $admCodes[10]->getValue());
 
-        $this->assertEquals('30022', $admCodes[11]->getType());
-        $this->assertEquals('005', $admCodes[11]->getValue());
+        self::assertEquals('30022', $admCodes[11]->getType());
+        self::assertEquals('005', $admCodes[11]->getValue());
 
         $egonCode = $standard->getEgonCode();
-        $this->assertEquals(38000004730, $egonCode->getCity());
-        $this->assertEquals(38000073526, $egonCode->getStreet());
-        $this->assertEquals(380100008326045, $egonCode->getHn());
+        self::assertEquals(38000004730, $egonCode->getCity());
+        self::assertEquals(38000073526, $egonCode->getStreet());
+        self::assertEquals(380100008326045, $egonCode->getHn());
 
         // Smart address assertions
-        $this->assertEquals('Italia', $smart->getCountry());
-        $this->assertEquals('Verona', $smart->getAdministrativeLevel());
-        $this->assertEquals('Verona', $smart->getCity());
-        $this->assertEquals('Via Antonio Pacinotti,4/B', $smart->getAddress());
-        $this->assertEquals('37135', $smart->getZipcode());
+        self::assertSame('Italia', $smart->getCountry());
+        self::assertSame('Verona', $smart->getAdministrativeLevel());
+        self::assertSame('Verona', $smart->getCity());
+        self::assertSame('Via Antonio Pacinotti,4/B', $smart->getAddress());
+        self::assertEquals('37135', $smart->getZipcode());
 
         // Geo
-        $this->assertEquals('45.40616800, 10.97379600', $geo->getLatLong());
-        $this->assertEquals('A41-111', $geo->getGeoLevel());
-        $this->assertEquals('0230910000922', $geo->getCensusCode());
+        self::assertSame('45.40616800, 10.97379600', $geo->getLatLong());
+        self::assertSame('A41-111', $geo->getGeoLevel());
+        self::assertEquals('0230910000922', $geo->getCensusCode());
 
         // Postal
-        $this->assertEquals('VIA ANTONIO PACINOTTI 4/B', $postal->getRow4());
-        $this->assertEquals('37135 VERONA VR', $postal->getRow5());
+        self::assertSame('VIA ANTONIO PACINOTTI 4/B', $postal->getRow4());
+        self::assertSame('37135 VERONA VR', $postal->getRow5());
 
         // Quality
-        $this->assertEquals('0', $quality->getLocality()->getFlag());
-        $this->assertEquals(0, $quality->getLocality()->getCode());
-        $this->assertEquals('Ok', $quality->getLocality()->getDescription());
+        self::assertEquals('0', $quality->getLocality()->getFlag());
+        self::assertEquals(0, $quality->getLocality()->getCode());
+        self::assertSame('Ok', $quality->getLocality()->getDescription());
 
-        $this->assertEquals('1', $quality->getStreet()->getFlag());
-        $this->assertEquals(801, $quality->getStreet()->getCode());
-        $this->assertEquals('Candidato strada con parole in meno', $quality->getStreet()->getDescription());
+        self::assertEquals('1', $quality->getStreet()->getFlag());
+        self::assertEquals(801, $quality->getStreet()->getCode());
+        self::assertSame('Candidato strada con parole in meno', $quality->getStreet()->getDescription());
 
-        $this->assertEquals('0', $quality->getHn()->getFlag());
-        $this->assertEquals(0, $quality->getHn()->getCode());
-        $this->assertEquals('Ok', $quality->getHn()->getDescription());
+        self::assertEquals('0', $quality->getHn()->getFlag());
+        self::assertEquals(0, $quality->getHn()->getCode());
+        self::assertSame('Ok', $quality->getHn()->getDescription());
 
         // System
-        $this->assertEquals(0, $system->getRetCode());
-        $this->assertEquals('Ok', $system->getDesRetCode());
+        self::assertEquals(0, $system->getRetCode());
+        self::assertSame('Ok', $system->getDesRetCode());
 
-        $this->assertTrue(true);
+        self::assertTrue(true);
     }
 
     /**
-     * 
-     * @param string $filePath
-     * @return array|null
-     * @throws RuntimeException
+     * @throws \RuntimeException
      */
-    private function loadJsonFromFile(string $filePath): ?array {
+    private function loadJsonFromFile(string $filePath): ?array
+    {
         if (!file_exists($filePath)) {
-            throw new RuntimeException('File not found: ' . $filePath);
+            throw new \RuntimeException('File not found: '.$filePath);
         }
 
         $content = file_get_contents($filePath);
 
-        if ($content === false) {
-            throw new RuntimeException('Unable to read file: ' . $filePath);
+        if (false === $content) {
+            throw new \RuntimeException('Unable to read file: '.$filePath);
         }
 
         return json_decode($content, true, 512, JSON_THROW_ON_ERROR);

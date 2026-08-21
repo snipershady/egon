@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * Copyright (C) 2022 Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
  *
@@ -21,67 +23,67 @@ namespace Egon\Dto\RequestValidationV4;
 
 final class Address
 {
-    /** @var int|null Egon code place */
+    /** @var null|int Egon code place */
     private ?int $egoncodePlace = null;
 
-    /** @var int|null Egon code house number */
+    /** @var null|int Egon code house number */
     private ?int $egoncodeHn = null;
 
-    /** @var string|null Country description */
+    /** @var null|string Country description */
     private ?string $country = null;
 
-    /** @var string|null State description */
+    /** @var null|string State description */
     private ?string $state = null;
 
-    /** @var string|null Region description */
+    /** @var null|string Region description */
     private ?string $region = null;
 
-    /** @var string|null Province description */
+    /** @var null|string Province description */
     private ?string $province = null;
 
-    /** @var string|null City description */
+    /** @var null|string City description */
     private ?string $city = null;
 
-    /** @var string|null District1 description */
+    /** @var null|string District1 description */
     private ?string $district1 = null;
 
-    /** @var string|null District2 description */
+    /** @var null|string District2 description */
     private ?string $district2 = null;
 
-    /** @var string|null District3 description */
+    /** @var null|string District3 description */
     private ?string $district3 = null;
 
-    /** @var string|null Zipcode description */
+    /** @var null|string Zipcode description */
     private ?string $zipcode = null;
 
-    /** @var string|null Town planning name (contains the type: Street, Square, Avenue, etc.) */
+    /** @var null|string Town planning name (contains the type: Street, Square, Avenue, etc.) */
     private ?string $streetType = null;
 
-    /** @var string|null Street description */
+    /** @var null|string Street description */
     private ?string $street = null;
 
-    /** @var string|null Full address */
+    /** @var null|string Full address */
     private ?string $address = null;
 
-    /** @var string|null House number */
+    /** @var null|string House number */
     private ?string $hn = null;
 
-    /** @var string|null Building */
+    /** @var null|string Building */
     private ?string $building = null;
 
-    /** @var string|null Sub Building */
+    /** @var null|string Sub Building */
     private ?string $subBuilding = null;
 
-    /** @var string|null Organization */
+    /** @var null|string Organization */
     private ?string $organization = null;
 
-    /** @var string|null Town planning name 2 (contains the type: Street, Square, Avenue, etc.) */
+    /** @var null|string Town planning name 2 (contains the type: Street, Square, Avenue, etc.) */
     private ?string $streetTypeStr2 = null;
 
-    /** @var string|null Street 2 description */
+    /** @var null|string Street 2 description */
     private ?string $street2 = null;
 
-    /** @var string|null House number 2 */
+    /** @var null|string House number 2 */
     private ?string $hn2 = null;
 
     public function getEgoncodePlace(): ?int
@@ -336,19 +338,25 @@ final class Address
         return $this;
     }
 
-    public static function fromArray(array $data): Address
+    /**
+     * @param array<string, mixed> $data
+     */
+    public static function fromArray(array $data): self
     {
-        $address = new Address();
+        $address = new self();
 
         foreach ($data as $key => $value) {
             $camelKey = self::snakeToCamel($key);
             $setter = 'set'.ucfirst($camelKey);
-            $address->$setter($value);
+            $address->{$setter}($value);
         }
 
         return $address;
     }
 
+    /**
+     * @return array<string, null|int|string>
+     */
     public function toArray(): array
     {
         $fields = [
@@ -378,8 +386,8 @@ final class Address
         $result = [];
         foreach ($fields as $field) {
             $getter = 'get'.ucfirst($field);
-            $snakeKey = self::camelToSnake($field);
-            $result[$snakeKey] = $this->$getter();
+            $snakeKey = $this->camelToSnake($field);
+            $result[$snakeKey] = $this->{$getter}();
         }
 
         return $result;
@@ -392,7 +400,7 @@ final class Address
         return array_shift($parts).implode('', array_map(ucfirst(...), $parts));
     }
 
-    private static function camelToSnake(string $input): string
+    private function camelToSnake(string $input): string
     {
         return strtolower((string) preg_replace('/(?<!^)[A-Z]/', '_$0', $input));
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * Copyright (C) 2022 Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
  *
@@ -33,24 +35,26 @@ final readonly class Parameter
         private ?OutputFormatEnum $outputFormatEnum = null,
         private ?OutputLanguageEnum $outputLanguageEnum = null,
         private ?OutputDescriptionEnum $outputDescriptionEnum = null,
-    ) {
-    }
+    ) {}
 
+    /**
+     * @return array<string, string>
+     */
     public function toArray(): array
     {
         $fields = [
             'iso3' => $this->countryCodeAlpha3Enum->value,
             'geo' => $this->outputGeoCodingEnum->value,
         ];
-        if (null !== $this->outputFormatEnum) {
+        if ($this->outputFormatEnum instanceof OutputFormatEnum) {
             $fields['fmtout'] = $this->outputFormatEnum->value;
         }
 
-        if (null !== $this->outputLanguageEnum) {
+        if ($this->outputLanguageEnum instanceof OutputLanguageEnum) {
             $fields['lngout'] = $this->outputLanguageEnum->value;
         }
 
-        if (null !== $this->outputDescriptionEnum) {
+        if ($this->outputDescriptionEnum instanceof OutputDescriptionEnum) {
             $fields['tpxout'] = $this->outputDescriptionEnum->value;
         }
 

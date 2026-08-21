@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * Copyright (C) 2022 Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
  *
@@ -19,15 +21,33 @@
 
 namespace Egon\Tests;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
+use Dotenv\Dotenv;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Description of AbstractTestCase
+ * Description of AbstractTestCase.
  *
  * @author Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
  */
-abstract class AbstractTestCase extends TestCase {
-    
+abstract class AbstractTestCase extends TestCase
+{
+    private static bool $envLoaded = false;
+
+    protected static function getApiToken(): string
+    {
+        if (!self::$envLoaded) {
+            Dotenv::createImmutable(__DIR__.'/..')->safeLoad();
+            self::$envLoaded = true;
+        }
+
+        $token = $_ENV['EGON_API_TOKEN'] ?? getenv('EGON_API_TOKEN');
+
+        if (!\is_string($token) || '' === $token) {
+            self::markTestSkipped('EGON_API_TOKEN is not set. Copy .env.example to .env and fill in a valid token to run this test.');
+        }
+
+        return $token;
+    }
 }

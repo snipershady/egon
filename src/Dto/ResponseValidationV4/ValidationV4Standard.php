@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * Copyright (C) 2022 Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
  *
@@ -114,6 +116,9 @@ final class ValidationV4Standard
         return $this->postalTown1;
     }
 
+    /**
+     * @return array<int, ValidationV4AdmCode>
+     */
     public function getAdmCode(): array
     {
         return $this->admCode;
@@ -222,6 +227,9 @@ final class ValidationV4Standard
         return $this;
     }
 
+    /**
+     * @param array<int, ValidationV4AdmCode> $admCode
+     */
     public function setAdmCode(array $admCode): static
     {
         $this->admCode = $admCode;

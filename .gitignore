@@ -3,3 +3,5 @@
 /nbproject/private/
 /.phpunit.cache/
 /.php-cs-fixer.cache
+/.rector.cache/
+/.env

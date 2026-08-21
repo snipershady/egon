@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * Copyright (C) 2022 Stefano Perrini <perrini.stefano@gmail.com> aka La Matrigna
  *
@@ -21,60 +23,71 @@ namespace Egon\Dto\ResponseValidationV4;
 
 final class ValidationV4Mapper
 {
+    /**
+     * @param array<array-key, mixed> $data
+     */
     public static function fromArray(array $data): ValidationV4Response
     {
         $validationV4Response = new ValidationV4Response();
 
-        if (isset($data['data'])) {
+        if (\is_array($data['data'] ?? null)) {
             $validationV4Response->setData(self::mapData($data['data']));
         }
 
-        if (isset($data['quality'])) {
+        if (\is_array($data['quality'] ?? null)) {
             $validationV4Response->setQuality(self::mapQuality($data['quality']));
         }
 
-        if (isset($data['system'])) {
+        if (\is_array($data['system'] ?? null)) {
             $validationV4Response->setSystem(self::mapSystem($data['system']));
         }
 
         return $validationV4Response;
     }
 
+    /**
+     * @param array<array-key, mixed> $data
+     */
     private static function mapData(array $data): ?ValidationV4Data
     {
         $validationV4Data = new ValidationV4Data();
 
-        if (empty($data['address'])) {
+        if (empty($data['address']) || !\is_array($data['address'])) {
             return null;
         }
 
         $validationV4Address = new ValidationV4Address();
 
-        if (isset($data['address']['standard'])) {
+        if (\is_array($data['address']['standard'] ?? null)) {
             $validationV4Standard = new ValidationV4Standard();
             foreach ($data['address']['standard'] as $k => $v) {
+                $k = (string) $k;
                 $camelKey = self::snakeToCamel($k);
-                if ('adm_code' === $k) {
+                if ('adm_code' === $k && \is_array($v)) {
                     $admCodes = [];
                     foreach ($v as $adm) {
+                        if (!\is_array($adm)) {
+                            continue;
+                        }
+
                         $admObj = new ValidationV4AdmCode();
-                        $admObj->setIso3($adm['iso3']);
-                        $admObj->setType($adm['type']);
-                        $admObj->setValue($adm['value']);
+                        $admObj->setIso3(self::toStringValue($adm['iso3'] ?? ''));
+                        $admObj->setType(self::toStringValue($adm['type'] ?? ''));
+                        $admObj->setValue(self::toStringValue($adm['value'] ?? ''));
                         $admCodes[] = $admObj;
                     }
 
                     $validationV4Standard->setAdmCode($admCodes);
-                } elseif ('egon_code' === $k) {
+                } elseif ('egon_code' === $k && \is_array($v)) {
                     $egon = new ValidationV4EgonCode();
-                    $egon->setCity($v['city'] ?? '');
-                    $egon->setStreet($v['street'] ?? '');
-                    $egon->setHn($v['hn'] ?? '');
+                    $egon->setCity(self::toStringValue($v['city'] ?? ''));
+                    $egon->setStreet(self::toStringValue($v['street'] ?? ''));
+                    $egon->setHn(self::toStringValue($v['hn'] ?? ''));
                     $validationV4Standard->setEgonCode($egon);
                 } else {
                     $method = 'set'.ucfirst($camelKey);
                     if (method_exists($validationV4Standard, $method)) {
-                        $validationV4Standard->$method($v);
+                        $validationV4Standard->{$method}($v);
                     }
                 }
             }
@@ -82,12 +95,12 @@ final class ValidationV4Mapper
             $validationV4Address->setStandard($validationV4Standard);
         }
 
-        if (isset($data['address']['smart'])) {
+        if (\is_array($data['address']['smart'] ?? null)) {
             $validationV4Smart = new ValidationV4Smart();
             foreach ($data['address']['smart'] as $k => $v) {
-                $method = 'set'.ucfirst(self::snakeToCamel($k));
+                $method = 'set'.ucfirst(self::snakeToCamel((string) $k));
                 if (method_exists($validationV4Smart, $method)) {
-                    $validationV4Smart->$method($v);
+                    $validationV4Smart->{$method}($v);
                 }
             }
 
@@ -96,24 +109,24 @@ final class ValidationV4Mapper
 
         $validationV4Data->setAddress($validationV4Address);
 
-        if (isset($data['geo'])) {
+        if (\is_array($data['geo'] ?? null)) {
             $validationV4Geo = new ValidationV4Geo();
             foreach ($data['geo'] as $k => $v) {
-                $method = 'set'.ucfirst(self::snakeToCamel($k));
+                $method = 'set'.ucfirst(self::snakeToCamel((string) $k));
                 if (method_exists($validationV4Geo, $method)) {
-                    $validationV4Geo->$method($v);
+                    $validationV4Geo->{$method}($v);
                 }
             }
 
             $validationV4Data->setGeo($validationV4Geo);
         }
 
-        if (isset($data['postal'])) {
+        if (\is_array($data['postal'] ?? null)) {
             $validationV4Postal = new ValidationV4Postal();
             foreach ($data['postal'] as $k => $v) {
-                $method = 'set'.ucfirst(self::snakeToCamel($k));
+                $method = 'set'.ucfirst(self::snakeToCamel((string) $k));
                 if (method_exists($validationV4Postal, $method)) {
-                    $validationV4Postal->$method($v);
+                    $validationV4Postal->{$method}($v);
                 }
             }
 
@@ -123,21 +136,25 @@ final class ValidationV4Mapper
         return $validationV4Data;
     }
 
+    /**
+     * @param array<array-key, mixed> $quality
+     */
     private static function mapQuality(array $quality): ValidationV4Quality
     {
         $validationV4Quality = new ValidationV4Quality();
 
-        if (isset($quality['address'])) {
+        if (\is_array($quality['address'] ?? null)) {
             $validationV4QualityAddress = new ValidationV4QualityAddress();
 
             foreach (['locality', 'street', 'hn'] as $field) {
-                if (isset($quality['address'][$field])) {
+                $fieldData = $quality['address'][$field] ?? null;
+                if (\is_array($fieldData)) {
                     $f = new ValidationV4QualityField();
-                    $f->setFlag($quality['address'][$field]['flag']);
-                    $f->setCode($quality['address'][$field]['code']);
-                    $f->setDescription($quality['address'][$field]['description']);
+                    $f->setFlag(self::toStringValue($fieldData['flag'] ?? ''));
+                    $f->setCode(self::toStringValue($fieldData['code'] ?? ''));
+                    $f->setDescription(self::toStringValue($fieldData['description'] ?? ''));
                     $method = 'set'.ucfirst($field);
-                    $validationV4QualityAddress->$method($f);
+                    $validationV4QualityAddress->{$method}($f);
                 }
             }
 
@@ -147,11 +164,14 @@ final class ValidationV4Mapper
         return $validationV4Quality;
     }
 
+    /**
+     * @param array<array-key, mixed> $system
+     */
     private static function mapSystem(array $system): ValidationV4System
     {
         $validationV4System = new ValidationV4System();
-        $validationV4System->setRetCode($system['ret_code']);
-        $validationV4System->setDesRetCode($system['des_ret_code']);
+        $validationV4System->setRetCode(isset($system['ret_code']) ? self::toStringValue($system['ret_code']) : null);
+        $validationV4System->setDesRetCode(isset($system['des_ret_code']) ? self::toStringValue($system['des_ret_code']) : null);
 
         return $validationV4System;
     }
@@ -161,5 +181,10 @@ final class ValidationV4Mapper
         $parts = explode('_', $string);
 
         return array_shift($parts).implode('', array_map(ucfirst(...), $parts));
+    }
+
+    private static function toStringValue(mixed $value): string
+    {
+        return \is_scalar($value) ? (string) $value : '';
     }
 }
