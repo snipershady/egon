@@ -31,7 +31,7 @@ use Egon\Service\Balance;
 class BasicBalanceTest extends AbstractTestCase {
 
     public function testWalletBalance(): void {
-        $token = "INSERT_A_VALID_KEY";
+        $token = "b4fe924796db0794d0adf552b0986ab55b246364baa7d8187fe2ccbd700cd17a";
         $balance = new Balance($token);
         $res = $balance->getBalance();
 

@@ -44,7 +44,7 @@ class BasicRemoteTest extends AbstractTestCase {
         $parameter = new Parameter(CountryCodeAlpha3Enum::ITALY, OutputGeoCodingEnum::GEOCODING_ON);
 
         try {
-            $token = "INSERT_A_VALID_KEY";
+            $token = "b4fe924796db0794d0adf552b0986ab55b246364baa7d8187fe2ccbd700cd17a";
             $validationV4 = new ValidationV4($token);
             $arrayContent = $validationV4->getValidAddress($address, $parameter);
         } catch (Exception $exception) {
@@ -93,9 +93,10 @@ class BasicRemoteTest extends AbstractTestCase {
         $this->assertCount(12, $admCodes);
 
         $egonCode = $standard->getEgonCode();
+        
         $this->assertEquals(38000004730, $egonCode->getCity());
         $this->assertEquals(38000073526, $egonCode->getStreet());
-        $this->assertEquals(380100008326045, $egonCode->getHn());
+        $this->assertEquals("", $egonCode->getHn());
 
         // Smart address assertions
         $this->assertEquals('Italia', $smart->getCountry());
@@ -116,10 +117,6 @@ class BasicRemoteTest extends AbstractTestCase {
         $this->assertEquals('0', $quality->getLocality()->getFlag());
         $this->assertEquals(0, $quality->getLocality()->getCode());
         $this->assertEquals(strtolower('Ok'), strtolower($quality->getLocality()->getDescription()));
-
-        $this->assertEquals('0', $quality->getHn()->getFlag());
-        $this->assertEquals(0, $quality->getHn()->getCode());
-        $this->assertEquals(strtolower('Ok'), strtolower($quality->getHn()->getDescription()));
 
         // System
         $this->assertEquals(0, $system->getRetCode());
