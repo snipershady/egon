@@ -24,12 +24,18 @@ namespace Egon\Dto\ResponseValidationV4;
 class ValidationV4EgonCode
 {
     private ?string $city = null;
+    private ?string $locality = null;
     private ?string $street = null;
     private ?string $hn = null;
 
     public function getCity(): ?string
     {
         return $this->city;
+    }
+
+    public function getLocality(): ?string
+    {
+        return $this->locality;
     }
 
     public function getStreet(): ?string
@@ -45,6 +51,13 @@ class ValidationV4EgonCode
     public function setCity(?string $city): static
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    public function setLocality(?string $locality): static
+    {
+        $this->locality = $locality;
 
         return $this;
     }

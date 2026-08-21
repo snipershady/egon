@@ -1,0 +1,103 @@
+{
+    "data": {
+        "address": {
+            "standard": {
+                "iso2": "FR",
+                "iso3": "FRA",
+                "country": "France",
+                "country_lng": "250",
+                "region": "Ile-de-France",
+                "region_lng": "250",
+                "province": "Paris",
+                "province_lng": "250",
+                "city": "Paris",
+                "city_lng": "250",
+                "zipcode": "75007",
+                "street_type": "Avenue",
+                "street_name": "Anatole France",
+                "street": "Avenue Anatole France",
+                "street_lng": "250",
+                "address": "5 Avenue Anatole France",
+                "full_address": "5 Avenue Anatole France, Paris, Ile-de-France, 75007, France",
+                "hn": "5",
+                "postal_town1": "PARIS",
+                "match_code": "2500013005325002663670000000005000000000",
+                "adm_code": [
+                    {
+                        "iso3": "FRA",
+                        "type": "50137",
+                        "value": "Paris"
+                    },
+                    {
+                        "iso3": "FRA",
+                        "type": "30029",
+                        "value": "7599"
+                    },
+                    {
+                        "iso3": "FRA",
+                        "type": "30028",
+                        "value": "PARIS"
+                    },
+                    {
+                        "iso3": "FRA",
+                        "type": "30036-Description",
+                        "value": "D#Champ de Mars"
+                    },
+                    {
+                        "iso3": "FRA",
+                        "type": "30036",
+                        "value": "751072812"
+                    },
+                    {
+                        "iso3": "FRA",
+                        "type": "30025",
+                        "value": "Paris 7e Arrondissement"
+                    },
+                    {
+                        "iso3": "FRA",
+                        "type": "30026",
+                        "value": "07"
+                    }
+                ],
+                "egon_code": {
+                    "city": 25000130053,
+                    "street": 25002663670
+                }
+            },
+            "smart": {
+                "country": "France",
+                "administrative_level": "Paris",
+                "city": "Paris",
+                "address": "5 Avenue Anatole France",
+                "zipcode": "75007"
+            }
+        },
+        "geo": {
+            "lat_long": "48.85834000, 02.29535600",
+            "geo_level": "A81-121"
+        },
+        "postal": {
+            "row4": "5 AVENUE ANATOLE FRANCE",
+            "row6": "75007 PARIS",
+            "row7": "FRANCE"
+        }
+    },
+    "quality": {
+        "address": {
+            "locality": {
+                "flag": "0",
+                "code": 0,
+                "description": "OK"
+            },
+            "street": {
+                "flag": "0",
+                "code": 0,
+                "description": "OK"
+            }
+        }
+    },
+    "system": {
+        "ret_code": 0,
+        "des_ret_code": "Ok"
+    }
+}

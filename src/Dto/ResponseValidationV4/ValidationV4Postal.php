@@ -23,8 +23,28 @@ namespace Egon\Dto\ResponseValidationV4;
 
 class ValidationV4Postal
 {
+    private ?string $row1 = null;
+    private ?string $row2 = null;
+    private ?string $row3 = null;
     private ?string $row4 = null;
     private ?string $row5 = null;
+    private ?string $row6 = null;
+    private ?string $row7 = null;
+
+    public function getRow1(): ?string
+    {
+        return $this->row1;
+    }
+
+    public function getRow2(): ?string
+    {
+        return $this->row2;
+    }
+
+    public function getRow3(): ?string
+    {
+        return $this->row3;
+    }
 
     public function getRow4(): ?string
     {
@@ -34,6 +54,37 @@ class ValidationV4Postal
     public function getRow5(): ?string
     {
         return $this->row5;
+    }
+
+    public function getRow6(): ?string
+    {
+        return $this->row6;
+    }
+
+    public function getRow7(): ?string
+    {
+        return $this->row7;
+    }
+
+    public function setRow1(?string $row1): static
+    {
+        $this->row1 = $row1;
+
+        return $this;
+    }
+
+    public function setRow2(?string $row2): static
+    {
+        $this->row2 = $row2;
+
+        return $this;
+    }
+
+    public function setRow3(?string $row3): static
+    {
+        $this->row3 = $row3;
+
+        return $this;
     }
 
     public function setRow4(?string $row4): static
@@ -46,6 +97,20 @@ class ValidationV4Postal
     public function setRow5(?string $row5): static
     {
         $this->row5 = $row5;
+
+        return $this;
+    }
+
+    public function setRow6(?string $row6): static
+    {
+        $this->row6 = $row6;
+
+        return $this;
+    }
+
+    public function setRow7(?string $row7): static
+    {
+        $this->row7 = $row7;
 
         return $this;
     }

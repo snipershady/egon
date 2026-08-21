@@ -1,0 +1,89 @@
+{
+    "data": {
+        "address": {
+            "standard": {
+                "iso2": "IT",
+                "iso3": "ITA",
+                "country": "Italia",
+                "country_lng": "380",
+                "city": "Cittainventata",
+                "zipcode": "00000",
+                "street_type": "Via",
+                "street_name": "Che Non Esiste Mai",
+                "street": "Via Che Non Esiste Mai",
+                "address": "Via Che Non Esiste Mai,99999",
+                "full_address": "Via Che Non Esiste Mai,99999, Cittainventata, 00000, Italia",
+                "hn": "99999",
+                "postal_town1": "CITTAINVENTATA",
+                "match_code": "CTNVNTT12VCNNSST1700000099999000000000",
+                "adm_code": [
+                    {
+                        "iso3": "ITA",
+                        "type": "30050",
+                        "value": "0777000"
+                    },
+                    {
+                        "iso3": "ITA",
+                        "type": "30060",
+                        "value": "086"
+                    },
+                    {
+                        "iso3": "ITA",
+                        "type": "30061",
+                        "value": "660999"
+                    },
+                    {
+                        "iso3": "ITA",
+                        "type": "30070",
+                        "value": "ITA"
+                    },
+                    {
+                        "iso3": "ITA",
+                        "type": "30071",
+                        "value": "IT"
+                    },
+                    {
+                        "iso3": "ITA",
+                        "type": "30072",
+                        "value": "380"
+                    },
+                    {
+                        "iso3": "ITA",
+                        "type": "30114",
+                        "value": "ITALIA"
+                    }
+                ],
+                "egon_code": []
+            },
+            "smart": {
+                "country": "Italia",
+                "city": "Cittainventata",
+                "address": "Via Che Non Esiste Mai,99999",
+                "zipcode": "00000"
+            }
+        },
+        "geo": [],
+        "postal": {
+            "row4": "VIA CHE NON ESISTE MAI 99999",
+            "row5": "00000"
+        }
+    },
+    "quality": {
+        "address": {
+            "locality": {
+                "flag": "3",
+                "code": 212,
+                "description": "Locality not found no candidates"
+            },
+            "street": {
+                "flag": "2",
+                "code": 302,
+                "description": "Street not found"
+            }
+        }
+    },
+    "system": {
+        "ret_code": 0,
+        "des_ret_code": "Ok"
+    }
+}

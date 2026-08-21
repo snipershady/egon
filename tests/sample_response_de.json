@@ -1,0 +1,92 @@
+{
+    "data": {
+        "address": {
+            "standard": {
+                "iso2": "DE",
+                "iso3": "DEU",
+                "country": "Deutschland",
+                "country_lng": "276",
+                "state": "Berlin",
+                "state_code": "BE",
+                "state_lng": "276",
+                "province": "Berlin",
+                "province_lng": "276",
+                "city": "Berlin",
+                "city_lng": "276",
+                "locality": "Mitte",
+                "locality_lng": "276",
+                "zipcode": "10117",
+                "street_type": "Platz",
+                "street_name": "Pariser",
+                "street": "Pariser Platz",
+                "street_lng": "276",
+                "address": "Pariser Platz 1",
+                "full_address": "Pariser Platz 1, Mitte, Berlin, BE, 10117, Deutschland",
+                "hn": "1",
+                "postal_town1": "BERLIN",
+                "match_code": "2760000891227600296069000000001000000000",
+                "adm_code": [
+                    {
+                        "iso3": "DEU",
+                        "type": "50137",
+                        "value": "Berlin"
+                    },
+                    {
+                        "iso3": "DEU",
+                        "type": "30070",
+                        "value": "DEU"
+                    },
+                    {
+                        "iso3": "DEU",
+                        "type": "30071",
+                        "value": "DE"
+                    },
+                    {
+                        "iso3": "DEU",
+                        "type": "30072",
+                        "value": "276"
+                    }
+                ],
+                "egon_code": {
+                    "city": 27600008912,
+                    "locality": 27600073750,
+                    "street": 27600296069
+                }
+            },
+            "smart": {
+                "country": "Deutschland",
+                "administrative_level": "Berlin",
+                "city": "Berlin",
+                "address": "Pariser Platz 1",
+                "zipcode": "10117"
+            }
+        },
+        "geo": {
+            "lat_long": "52.51592981, 13.37812311",
+            "geo_level": "A41-111"
+        },
+        "postal": {
+            "row3": "MITTE",
+            "row4": "PARISER PLATZ 1",
+            "row5": "10117"
+        }
+    },
+    "quality": {
+        "address": {
+            "locality": {
+                "flag": "1",
+                "code": 701,
+                "description": "Locality candidate found"
+            },
+            "street": {
+                "flag": "1",
+                "code": 801,
+                "description": "Street candidate found"
+            }
+        }
+    },
+    "system": {
+        "ret_code": 0,
+        "des_ret_code": "Ok"
+    }
+}

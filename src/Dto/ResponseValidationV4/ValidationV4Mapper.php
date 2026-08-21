@@ -81,6 +81,7 @@ final class ValidationV4Mapper
                 } elseif ('egon_code' === $k && \is_array($v)) {
                     $egon = new ValidationV4EgonCode();
                     $egon->setCity(self::toStringValue($v['city'] ?? ''));
+                    $egon->setLocality(self::toStringValue($v['locality'] ?? ''));
                     $egon->setStreet(self::toStringValue($v['street'] ?? ''));
                     $egon->setHn(self::toStringValue($v['hn'] ?? ''));
                     $validationV4Standard->setEgonCode($egon);

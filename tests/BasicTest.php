@@ -37,11 +37,7 @@ final class BasicTest extends AbstractTestCase
 {
     public function testPersistedSampleResponse(): void
     {
-        try {
-            $arrayContent = $this->loadJsonFromFile(__DIR__.'/sample_response.json');
-        } catch (\RuntimeException $runtimeException) {
-            echo 'Errore: '.$runtimeException->getMessage();
-        }
+        $arrayContent = self::loadJsonFromFile(__DIR__.'/sample_response.json');
 
         try {
             $response = ValidationV4Mapper::fromArray($arrayContent);
@@ -156,23 +152,5 @@ final class BasicTest extends AbstractTestCase
         self::assertSame('Ok', $system->getDesRetCode());
 
         self::assertTrue(true);
-    }
-
-    /**
-     * @throws \RuntimeException
-     */
-    private function loadJsonFromFile(string $filePath): ?array
-    {
-        if (!file_exists($filePath)) {
-            throw new \RuntimeException('File not found: '.$filePath);
-        }
-
-        $content = file_get_contents($filePath);
-
-        if (false === $content) {
-            throw new \RuntimeException('Unable to read file: '.$filePath);
-        }
-
-        return json_decode($content, true, 512, JSON_THROW_ON_ERROR);
     }
 }

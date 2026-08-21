@@ -25,10 +25,13 @@ final class ValidationV4Standard
 {
     private ?string $iso3 = null;
     private ?string $country = null;
+    private ?string $state = null;
+    private ?string $stateCode = null;
     private ?string $region = null;
     private ?string $province = null;
     private ?string $provinceCode = null;
     private ?string $city = null;
+    private ?string $locality = null;
     private ?string $zipcode = null;
     private ?string $streetType = null;
     private ?string $streetName = null;
@@ -56,6 +59,16 @@ final class ValidationV4Standard
         return $this->country;
     }
 
+    public function getState(): ?string
+    {
+        return $this->state;
+    }
+
+    public function getStateCode(): ?string
+    {
+        return $this->stateCode;
+    }
+
     public function getRegion(): ?string
     {
         return $this->region;
@@ -74,6 +87,11 @@ final class ValidationV4Standard
     public function getCity(): ?string
     {
         return $this->city;
+    }
+
+    public function getLocality(): ?string
+    {
+        return $this->locality;
     }
 
     public function getZipcode(): ?string
@@ -143,6 +161,20 @@ final class ValidationV4Standard
         return $this;
     }
 
+    public function setState(?string $state): static
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    public function setStateCode(?string $stateCode): static
+    {
+        $this->stateCode = $stateCode;
+
+        return $this;
+    }
+
     public function setRegion(?string $region): static
     {
         $this->region = $region;
@@ -167,6 +199,13 @@ final class ValidationV4Standard
     public function setCity(?string $city): static
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    public function setLocality(?string $locality): static
+    {
+        $this->locality = $locality;
 
         return $this;
     }

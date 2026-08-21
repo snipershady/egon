@@ -50,4 +50,30 @@ abstract class AbstractTestCase extends TestCase
 
         return $token;
     }
+
+    /**
+     * @return array<array-key, mixed>
+     *
+     * @throws \RuntimeException
+     */
+    protected static function loadJsonFromFile(string $filePath): array
+    {
+        if (!file_exists($filePath)) {
+            throw new \RuntimeException('File not found: '.$filePath);
+        }
+
+        $content = file_get_contents($filePath);
+
+        if (false === $content) {
+            throw new \RuntimeException('Unable to read file: '.$filePath);
+        }
+
+        $decoded = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
+
+        if (!\is_array($decoded)) {
+            throw new \RuntimeException('Fixture did not decode to an array: '.$filePath);
+        }
+
+        return $decoded;
+    }
 }

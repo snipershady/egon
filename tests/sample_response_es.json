@@ -1,0 +1,73 @@
+{
+    "data": {
+        "address": {
+            "standard": {
+                "iso2": "ES",
+                "iso3": "ESP",
+                "country": "España",
+                "country_lng": "724",
+                "region": "Comunidad de Madrid",
+                "region_lng": "724",
+                "province": "Madrid",
+                "province_code": "M",
+                "province_lng": "724",
+                "city": "Madrid",
+                "city_lng": "724",
+                "zipcode": "28014",
+                "street_type": "Calle",
+                "street_name": "de Alcalá",
+                "street": "Calle de Alcalá",
+                "street_lng": "724",
+                "address": "Calle de Alcalá 1",
+                "full_address": "Calle de Alcalá 1, Madrid, M, Comunidad de Madrid, 28014, España",
+                "hn": "1",
+                "postal_town1": "MADRID",
+                "match_code": "7240000442572401061521000000001000000000",
+                "adm_code": [
+                    {
+                        "iso3": "ESP",
+                        "type": "50137",
+                        "value": "Madrid"
+                    }
+                ],
+                "egon_code": {
+                    "city": 72400004425,
+                    "street": 72401061521
+                }
+            },
+            "smart": {
+                "country": "España",
+                "administrative_level": "Madrid",
+                "city": "Madrid",
+                "address": "Calle de Alcalá 1",
+                "zipcode": "28014"
+            }
+        },
+        "geo": {
+            "lat_long": "40.41718495, -03.70218030",
+            "geo_level": "A41-111"
+        },
+        "postal": {
+            "row4": "CALLE DE ALCALÁ 1",
+            "row5": "28014"
+        }
+    },
+    "quality": {
+        "address": {
+            "locality": {
+                "flag": "0",
+                "code": 0,
+                "description": "OK"
+            },
+            "street": {
+                "flag": "0",
+                "code": 0,
+                "description": "OK"
+            }
+        }
+    },
+    "system": {
+        "ret_code": 0,
+        "des_ret_code": "Ok"
+    }
+}
